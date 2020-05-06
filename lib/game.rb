@@ -6,26 +6,30 @@ class Level
     @level = level  
   end
   
-  def print_to_screen(frog)
-    @level[frog.vert][frog.hor] = "f" 
+  def print_to_screen(player)
+    @level[player.y][player.x] = "o" 
     @level.each { |slice| puts slice.center(16) }
     puts " " * (@level[0].length - 1)
-    @level[frog.vert][frog.hor] = "_"
+    @level[player.y][player.x] = " "
+  end
+  
+  def move_possible(x,y)
+    return @level[y][x] != "-"
   end
   
 end
 
-class Frog
+class Player
   
-  attr_accessor :hor, :vert
+  attr_accessor :x, :y
   
   def initialize
-    @vert = 0
-    @hor = 0
+    @y = 1
+    @x = 1
   end
   
   def position_check(current_level)
-    if current_level[@vert][@hor] == "X"
+    if current_level[@y][@x] == "X"
       puts "you are dead"
       exit
     end
@@ -34,33 +38,34 @@ end
 
 require_relative 'basic_methods'
   
-frog = Frog.new
+player = Player.new
 
 
-level_1 = Level.new(["________","___ ___ "," ___ ___","__  __  "," __  __ ","________"])
-level_1.print_to_screen(frog)
+level_1 = Level.new(["----------",
+                    "-    X   -",
+                    "-  X     -",
+                    "-    --  -",
+                    "-  X     -",
+                    "----- ----"])
+level_1.print_to_screen(player)
 max_vert = level_1.level.length - 1
 max_hor = level_1.level[0].length - 1
 
 loop do
   move = user_move
-  #puts move
   case move
   when "w"
-    frog.vert -= 1
-    frog.vert = 0 if frog.vert < 0
+    player.y -= 1 if level_1.move_possible(player.x, (player.y - 1))   
   when "a"
-    frog.hor -= 1
-    frog.hor = 0 if frog.hor < 0
+    player.x -= 1 if level_1.move_possible((player.x - 1), player.y )
   when "s"
-    frog.vert += 1
+    player.y += 1 if level_1.move_possible(player.x, (player.y + 1))
   when "d"
-    frog.hor += 1
-    frog.hor = max_hor if frog.hor > max_hor
+    player.x += 1 if level_1.move_possible((player.x + 1), player.y)
   end
-  frog.position_check(level_1.level)
-  level_1.print_to_screen(frog)
-  if frog.vert == max_vert
+  player.position_check(level_1.level)
+  level_1.print_to_screen(player)
+  if player.y == max_vert
     puts "win"
     exit
   end
