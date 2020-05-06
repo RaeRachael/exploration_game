@@ -18,4 +18,13 @@ class Level
     return @level[y][x] != "-"
   end
   
+  def position_check
+    if @level[$player.y][$player.x] == "X"
+       puts "you are dead"
+      exit
+    elsif @level[$player.y][$player.x] == "D"
+      puts "found the stairs, going down to the next level"
+      $lvl_num += 1
+    end
+  end
 end

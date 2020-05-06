@@ -11,15 +11,6 @@ class Player
     @x = 1
   end
   
-  def position_check
-    if $current_level.level[@y][@x] == "X"
-      puts "you are dead"
-      exit
-    elsif $current_level.level[@y][@x] == "D"
-      puts "found the stairs, going down to the next level"
-      $lvl_num += 1
-    end
-  end
 end
 
  
@@ -54,7 +45,7 @@ def player_move
 end
 
 def player_status
-  $player.position_check
+  $current_level.position_check
   $current_level.print_to_screen
   if $lvl_num == 2
     puts "win"
