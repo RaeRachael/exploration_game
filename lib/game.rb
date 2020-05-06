@@ -11,11 +11,11 @@ class Player
     @x = 1
   end
   
-  def position_check(current_level)
-    if current_level[@y][@x] == "X"
+  def position_check
+    if $current_level.level[@y][@x] == "X"
       puts "you are dead"
       exit
-    elsif current_level[@y][@x] == "D"
+    elsif $current_level.level[@y][@x] == "D"
       puts "found the stairs, going down to the next level"
       $lvl_num += 1
     end
@@ -24,19 +24,19 @@ end
 
  
 $player = Player.new
-$lvl_num = 1
+$lvl_num = 0
 
 
-level_1 = Level.new(["----------",
+levels = [Level.new(["----------",
                     "-    X   -",
                     "-  X     -",
                     "-    --  -",
                     "-  X     -",
-                    "-----D----"])
+                    "-----D----"])]
 
-$current_level = level_1
+$current_level = levels[$lvl_num]
 
-$current_level.print_to_screen($player)
+$current_level.print_to_screen
 
 
 def player_move
@@ -54,8 +54,8 @@ def player_move
 end
 
 def player_status
-  $player.position_check($current_level.level)
-  $current_level.print_to_screen($player)
+  $player.position_check
+  $current_level.print_to_screen
   if $lvl_num == 2
     puts "win"
     exit
