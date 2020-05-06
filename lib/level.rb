@@ -25,6 +25,7 @@ class Level
     elsif @level[$player.y][$player.x] == "D"
       puts "found the stairs, going down to the next level"
       $lvl_num += 1
+      $player.y, $player.x = 1,1
     end
   end
 end
