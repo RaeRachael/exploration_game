@@ -24,8 +24,8 @@ class Frog
     @hor = 0
   end
   
-  def alive_check(current_level)
-    if current_level[@vert][@hor] == " "
+  def position_check(current_level)
+    if current_level[@vert][@hor] == "X"
       puts "you are dead"
       exit
     end
@@ -58,7 +58,7 @@ loop do
     frog.hor += 1
     frog.hor = max_hor if frog.hor > max_hor
   end
-  frog.alive_check(level_1.level)
+  frog.position_check(level_1.level)
   level_1.print_to_screen(frog)
   if frog.vert == max_vert
     puts "win"
