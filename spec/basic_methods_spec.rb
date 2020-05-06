@@ -22,4 +22,27 @@ describe "basic methods" do
       end
     end
   end
+  
+  require 'io/console'
+  require 'stringio'
+  
+  describe "#user_move" do
+    let(:input) { StringIO.new("wasd") }
+    it "returns the charactors entered in order" do
+      $stdin = input
+      expect(user_move).to eq("w")
+      expect(user_move).to eq("a")
+      expect(user_move).to eq("s")
+      expect(user_move).to eq("d")
+      $stdin = STDIN
+    end
+    
+    let(:input2) { StringIO.new("fsqa") }
+    it "returns the /[wasd]/ charactors entered in order" do
+      $stdin = input2
+      expect(user_move).to eq("s")
+      expect(user_move).to eq("a")      
+      $stdin = STDIN
+    end
+  end
 end
