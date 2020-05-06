@@ -1,3 +1,6 @@
+  
+require_relative 'basic_methods'
+
 class Level
   
   attr_accessor :level
@@ -12,6 +15,7 @@ class Level
     puts " " * (@level[0].length - 1)
     @level[player.y][player.x] = " "
   end
+
   
   def move_possible(x,y)
     return @level[y][x] != "-"
@@ -32,13 +36,16 @@ class Player
     if current_level[@y][@x] == "X"
       puts "you are dead"
       exit
+    elsif current_level[@y][@x] == "D"
+      puts "found the stairs, going down to the next level"
+      lvl_num += 1
     end
   end
 end
 
-require_relative 'basic_methods'
   
 player = Player.new
+lvl_num = 1
 
 
 level_1 = Level.new(["----------",
@@ -46,10 +53,8 @@ level_1 = Level.new(["----------",
                     "-  X     -",
                     "-    --  -",
                     "-  X     -",
-                    "----- ----"])
+                    "-----D----"])
 level_1.print_to_screen(player)
-max_vert = level_1.level.length - 1
-max_hor = level_1.level[0].length - 1
 
 loop do
   move = user_move
@@ -65,7 +70,7 @@ loop do
   end
   player.position_check(level_1.level)
   level_1.print_to_screen(player)
-  if player.y == max_vert
+  if lvl_num == 2
     puts "win"
     exit
   end
