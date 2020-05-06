@@ -1,27 +1,6 @@
   
 require_relative 'basic_methods'
-
-class Level
-  
-  attr_accessor :level
-  
-  def initialize(level)
-    @level = level  
-  end
-  
-  def print_to_screen(player)
-    @level[player.y][player.x] = "o" 
-    @level.each { |slice| puts slice.center(16) }
-    puts " " * (@level[0].length - 1)
-    @level[player.y][player.x] = " "
-  end
-
-  
-  def move_possible(x,y)
-    return @level[y][x] != "-"
-  end
-  
-end
+require_relative 'level'
 
 class Player
   
@@ -38,14 +17,14 @@ class Player
       exit
     elsif current_level[@y][@x] == "D"
       puts "found the stairs, going down to the next level"
-      lvl_num += 1
+      $lvl_num += 1
     end
   end
 end
 
-  
-player = Player.new
-lvl_num = 1
+ 
+$player = Player.new
+$lvl_num = 1
 
 
 level_1 = Level.new(["----------",
@@ -54,24 +33,36 @@ level_1 = Level.new(["----------",
                     "-    --  -",
                     "-  X     -",
                     "-----D----"])
-level_1.print_to_screen(player)
 
-loop do
+$current_level = level_1
+
+$current_level.print_to_screen($player)
+
+
+def player_move
   move = user_move
   case move
   when "w"
-    player.y -= 1 if level_1.move_possible(player.x, (player.y - 1))   
+    $player.y -= 1 if $current_level.move_possible($player.x, ($player.y - 1))   
   when "a"
-    player.x -= 1 if level_1.move_possible((player.x - 1), player.y )
+    $player.x -= 1 if $current_level.move_possible(($player.x - 1), $player.y )
   when "s"
-    player.y += 1 if level_1.move_possible(player.x, (player.y + 1))
+    $player.y += 1 if $current_level.move_possible($player.x, ($player.y + 1))
   when "d"
-    player.x += 1 if level_1.move_possible((player.x + 1), player.y)
+    $player.x += 1 if $current_level.move_possible(($player.x + 1), $player.y)
   end
-  player.position_check(level_1.level)
-  level_1.print_to_screen(player)
-  if lvl_num == 2
+end
+
+def player_status
+  $player.position_check($current_level.level)
+  $current_level.print_to_screen($player)
+  if $lvl_num == 2
     puts "win"
     exit
   end
+end
+
+loop do
+  player_move
+  player_status
 end
