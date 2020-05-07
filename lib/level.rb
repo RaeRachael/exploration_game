@@ -7,14 +7,13 @@ class Level
   end
   
   def print_to_screen
-    replace = @level[$player.y][$player.x]
     @level[$player.y][$player.x] = "o"
     if $monsters
       $monsters.each { |monster| @level[monster.y][monster.x] = "X" }
     end
     @level.each { |slice| puts slice.center(16) }
     puts 
-    @level[$player.y][$player.x] = replace
+    @level[$player.y][$player.x] = " "
     if $monsters
       $monsters.each { |monster| @level[monster.y][monster.x] = " " }
     end
