@@ -26,10 +26,6 @@ class Level
     end
   end
   
-  def move_possible(x,y)
-    return @level[y][x] != "-"
-  end
-  
   def position_check
     if $monsters
       $monsters.each do |monster|
@@ -69,6 +65,12 @@ def level_load
             "-        -",
             "-      X -",
             "-       D-",
+            "----------"],
+            ["----------",
+            "-        -",
+            "-        -",
+            "-      XX-",
+            "-      XD-",
             "----------"]
 
   $current_level.level = levels[$lvl_num]
