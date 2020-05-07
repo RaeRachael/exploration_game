@@ -1,6 +1,6 @@
-require_relative '../lib/basic_methods.rb'
+require_relative '../lib/charactors.rb'
 
-describe "basic methods" do
+describe "charactors" do
   
   describe "#pause" do
     

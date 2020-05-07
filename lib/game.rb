@@ -1,20 +1,8 @@
   
-require_relative 'basic_methods'
+require_relative 'characters'
 require_relative 'level'
-
-class Player
-  
-  attr_accessor :x, :y
-  
-  def initialize
-    @y = 1
-    @x = 1
-  end
-  
-end
-
  
-$player = Player.new
+$player = Character.new(1,1)
 $lvl_num = 0
 
 def player_move

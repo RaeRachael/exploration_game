@@ -29,6 +29,10 @@ class Level
   end
 end
 
+def print_level(level) 
+  puts level
+end
+
 def level_load
 levels = ["----------",
           "-    X   -",
