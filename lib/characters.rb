@@ -4,8 +4,8 @@ class Character
   attr_accessor :x, :y
   
   def initialize(x,y)
-    @y = 1
-    @x = 1
+    @y = y 
+    @x = x 
   end
   
 end
@@ -32,6 +32,14 @@ def player_move
   check_and_move($player, move)
 end
 
+def monster_move
+  return if $monsters == nil
+  possible_moves = ["w","a","s","d",nil,nil]
+  $monsters.each do |monster|
+    check_and_move(monster,possible_moves.sample)
+  end
+end
+
 def check_and_move(character, move)
   case move
   when "w"
@@ -48,11 +56,11 @@ end
 def player_status
   if $current_level.position_check
     $lvl_num += 1
+    if $lvl_num == 2
+      puts "win"
+      exit
+    end
     level_load
-  end
-  if $lvl_num == 2
-    puts "win"
-    exit
   end
   $current_level.print_to_screen
 end

@@ -8,10 +8,16 @@ class Level
   
   def print_to_screen
     replace = @level[$player.y][$player.x]
-    @level[$player.y][$player.x] = "o" 
+    @level[$player.y][$player.x] = "o"
+    if $monsters
+      $monsters.each { |monster| @level[monster.y][monster.x] = "X" }
+    end
     @level.each { |slice| puts slice.center(16) }
     puts 
-    @level[$player.y][$player.x] = replace 
+    @level[$player.y][$player.x] = replace
+    if $monsters
+      $monsters.each { |monster| @level[monster.y][monster.x] = " " }
+    end
   end
   
   def move_possible(x,y)
@@ -19,10 +25,15 @@ class Level
   end
   
   def position_check
-    if @level[$player.y][$player.x] == "X"
-       puts "you are dead"
-      exit
-    elsif @level[$player.y][$player.x] == "D"
+    if $monsters
+      $monsters.each do |monster|
+        if $player.y == monster.y && $player.x == monster.x
+          puts "you are dead"
+          exit
+        end
+      end
+    end
+    if @level[$player.y][$player.x] == "D"
       puts "found the stairs, going down to the next level"
       return true
     end
@@ -53,12 +64,12 @@ def level_load
 end
 
 def add_monsters_in(level)
-  monsters = []
-  level.each do |y|
-    y.chars.each do |x|
-      if x == "X"
+  $monsters = []
+  level.each_with_index do |line, y|
+    line.split("").each_with_index do |char, x|
+      if char == "X"
         basic = Character.new(x,y)
-        monsters << basic
+        $monsters << basic
       end
     end
   end
