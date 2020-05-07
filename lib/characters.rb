@@ -29,15 +29,19 @@ end
 
 def player_move
   move = user_move
+  check_and_move($player, move)
+end
+
+def check_and_move(character, move)
   case move
   when "w"
-    $player.y -= 1 if $current_level.move_possible($player.x, ($player.y - 1))   
+    character.y -= 1 if $current_level.move_possible(character.x, (character.y - 1))   
   when "a"
-    $player.x -= 1 if $current_level.move_possible(($player.x - 1), $player.y )
+    character.x -= 1 if $current_level.move_possible((character.x - 1), character.y )
   when "s"
-    $player.y += 1 if $current_level.move_possible($player.x, ($player.y + 1))
+    character.y += 1 if $current_level.move_possible(character.x, (character.y + 1))
   when "d"
-    $player.x += 1 if $current_level.move_possible(($player.x + 1), $player.y)
+    character.x += 1 if $current_level.move_possible((character.x + 1), character.y)
   end
 end
 

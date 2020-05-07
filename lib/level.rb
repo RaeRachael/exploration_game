@@ -10,7 +10,7 @@ class Level
     replace = @level[$player.y][$player.x]
     @level[$player.y][$player.x] = "o" 
     @level.each { |slice| puts slice.center(16) }
-    puts " " * (@level[0].length - 1)
+    puts 
     @level[$player.y][$player.x] = replace 
   end
   
@@ -34,19 +34,32 @@ def print_level(level)
 end
 
 def level_load
-levels = ["----------",
-          "-    X   -",
-          "-  X     -",
-          "-    --  -",
-          "-  X     -",
-          "-----D----"],
-         ["----------",
-          "-   X    -",
-          "-  -  XX -",
-          "- X  -   -",
-          "-   -  D -",
-          "----------"]
+  levels = ["----------",
+            "- -    - -",
+            "- - -    -",
+            "- - ---- -",
+            "-    -D  -",
+            "----------"],
+           ["----------",
+            "-        -",
+            "-    X   -",
+            "-        -",
+            "-       D-",
+            "----------"]
 
-$current_level.level = levels[$lvl_num]
-$player.x, $player.y = 1, 1
+  $current_level.level = levels[$lvl_num]
+  $player.x, $player.y = 1, 1
+  add_monsters_in(levels[$lvl_num])
+end
+
+def add_monsters_in(level)
+  monsters = []
+  level.each do |y|
+    y.chars.each do |x|
+      if x == "X"
+        basic = Character.new(x,y)
+        monsters << basic
+      end
+    end
+  end
 end
