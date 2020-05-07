@@ -5,5 +5,5 @@ to play
 ruby ./lib/game
 ```
 
-move the 'o' to the 'D' with wasd keys, avoid the 'X's.
-good luck :) 
+move yourself('o') to the stairs('S') with wasd keys, avoid the monsters('X').
+try to find the treasure('t'). good luck :) 

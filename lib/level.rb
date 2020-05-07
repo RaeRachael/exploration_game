@@ -36,9 +36,13 @@ class Level
         end
       end
     end
-    if @level[$player.y][$player.x] == "D"
-      puts "found the stairs, going down to the next level"
+    if @level[$player.y][$player.x] == "S"
+      puts "found the stairs, going up to the next level"
       return true
+    end
+    if @level[$player.y][$player.x] == "t"
+      puts "found the treasure, you winner!!"
+      exit
     end
   end
   
@@ -58,19 +62,25 @@ def level_load
             "- -    - -",
             "- - -    -",
             "- - ---- -",
-            "-    -D  -",
+            "-    -S  -",
             "----------"],
            ["----------",
             "-        -",
             "-        -",
             "-      X -",
-            "-       D-",
+            "-       S-",
+            "----------"],
+            ["----------",
+            "-         -",
+            "-    -    -",
+            "- X  -   X-",
+            "-    -   S-",
             "----------"],
             ["----------",
             "-        -",
             "-        -",
             "-      XX-",
-            "-      XD-",
+            "-      Xt-",
             "----------"]
 
   $current_level.level = levels[$lvl_num]

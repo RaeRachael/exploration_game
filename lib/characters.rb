@@ -77,10 +77,6 @@ end
 def player_status
   if $current_level.position_check
     $lvl_num += 1
-    if $lvl_num == 3
-      puts "win"
-      exit
-    end
     level_load
   end
   $current_level.print_to_screen
