@@ -17,25 +17,6 @@ end
 $player = Player.new
 $lvl_num = 0
 
-def levels
-levels = [Level.new(["----------",
-                    "-    X   -",
-                    "-  X     -",
-                    "-    --  -",
-                    "-  X     -",
-                    "-----D----"]),
-          Level.new(["----------",
-                      "-   X    -",
-                      "-  -  XX -",
-                      "- X  -   -",
-                      "-   -  D -",
-                      "----------"])]
-
-$current_level = levels[$lvl_num]
-$player.x, $player.y = 1, 1
-end
-
-
 def player_move
   move = user_move
   case move
@@ -51,7 +32,10 @@ def player_move
 end
 
 def player_status
-  levels if $current_level.position_check      
+  if $current_level.position_check
+    $lvl_num += 1
+    level_load
+  end
   if $lvl_num == 2
     puts "win"
     exit
@@ -59,8 +43,9 @@ def player_status
   $current_level.print_to_screen
 end
 
+$current_level = Level.new
+level_load
 
-levels
 loop do
   player_status
   player_move  

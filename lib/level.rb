@@ -2,8 +2,8 @@ class Level
   
   attr_accessor :level
   
-  def initialize(level)
-    @level = level  
+  def initialize
+    @level = []  
   end
   
   def print_to_screen
@@ -24,8 +24,25 @@ class Level
       exit
     elsif @level[$player.y][$player.x] == "D"
       puts "found the stairs, going down to the next level"
-      $lvl_num += 1
-      $player.y, $player.x = 1,1
+      return true
     end
   end
+end
+
+def level_load
+levels = ["----------",
+          "-    X   -",
+          "-  X     -",
+          "-    --  -",
+          "-  X     -",
+          "-----D----"],
+         ["----------",
+          "-   X    -",
+          "-  -  XX -",
+          "- X  -   -",
+          "-   -  D -",
+          "----------"]
+
+$current_level.level = levels[$lvl_num]
+$player.x, $player.y = 1, 1
 end
