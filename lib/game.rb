@@ -10,5 +10,5 @@ level_load
 loop do
   player_status
   player_move
-  monster_move
+  monster_move if time_check
 end

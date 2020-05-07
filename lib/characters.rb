@@ -64,3 +64,12 @@ def player_status
   end
   $current_level.print_to_screen
 end
+
+def time_check
+  $start ||= Time.now
+  if Time.now - $start > 0.5
+    $start = Time.now
+    return true
+  end
+  false
+end
