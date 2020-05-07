@@ -3,18 +3,26 @@ class Level
   attr_accessor :level
   
   def initialize
-    @level = []  
+    @level = []
+    @save = []
   end
   
   def print_to_screen
     @level[$player.y][$player.x] = "o"
     if $monsters
-      $monsters.each { |monster| @level[monster.y][monster.x] = "X" }
+      $monsters.each_with_index { |monster,i| @save[i] = @level[monster.y][monster.x]
+       @level[monster.y][monster.x] = "X" }
     end
     print_level
     @level[$player.y][$player.x] = " "
     if $monsters
-      $monsters.each { |monster| @level[monster.y][monster.x] = " " }
+      $monsters.each_with_index do |monster,i| 
+        if @save[i] == "X"
+          @level[monster.y][monster.x] = " "
+        else
+          @level[monster.y][monster.x] = @save[i]
+        end
+      end
     end
   end
   
@@ -58,8 +66,8 @@ def level_load
             "----------"],
            ["----------",
             "-        -",
-            "-    X   -",
             "-        -",
+            "-      X -",
             "-       D-",
             "----------"]
 
