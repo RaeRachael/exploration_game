@@ -11,8 +11,7 @@ class Level
     if $monsters
       $monsters.each { |monster| @level[monster.y][monster.x] = "X" }
     end
-    @level.each { |slice| puts slice.center(16) }
-    puts 
+    print_level
     @level[$player.y][$player.x] = " "
     if $monsters
       $monsters.each { |monster| @level[monster.y][monster.x] = " " }
@@ -28,6 +27,7 @@ class Level
       $monsters.each do |monster|
         if $player.y == monster.y && $player.x == monster.x
           puts "you are dead"
+          print_death_location
           exit
         end
       end
@@ -37,10 +37,16 @@ class Level
       return true
     end
   end
-end
+  
+  def print_death_location
+    @level[$player.y][$player.x] = "X"
+    print_level
+  end
 
-def print_level(level) 
-  puts level
+  def print_level 
+    @level.each { |slice| puts slice.center(16) }
+    puts 
+  end
 end
 
 def level_load
