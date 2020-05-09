@@ -1,12 +1,12 @@
 class Level
-  
+
   attr_accessor :level
-  
+
   def initialize
     @level = []
     @save = []
   end
-  
+
   def print_to_screen
     @level[$player.y][$player.x] = "o"
     if $monsters
@@ -16,7 +16,7 @@ class Level
     print_level
     @level[$player.y][$player.x] = " "
     if $monsters
-      $monsters.each_with_index do |monster,i| 
+      $monsters.each_with_index do |monster,i|
         if @save[i] == "X"
           @level[monster.y][monster.x] = " "
         else
@@ -25,7 +25,7 @@ class Level
       end
     end
   end
-  
+
   def position_check
     if $monsters
       $monsters.each do |monster|
@@ -45,15 +45,15 @@ class Level
       exit
     end
   end
-  
+
   def print_death_location
     @level[$player.y][$player.x] = "X"
     print_level
   end
 
-  def print_level 
+  def print_level
     @level.each { |slice| puts slice.center(16) }
-    puts 
+    puts
   end
 end
 
@@ -63,7 +63,7 @@ def level_load
             "- - ----- -",
             "- - -     -",
             "- - -  ----",
-            "-   -    S-", 
+            "-   -    S-",
             "-----------"],
            ["-----------",
             "-         -",
@@ -104,7 +104,7 @@ def add_monsters_in(level)
   level.each_with_index do |line, y|
     line.split("").each_with_index do |char, x|
       if char == "X"
-        basic = Character.new(x,y)
+        basic = Monster.new(x,y)
         $monsters << basic
       end
     end
