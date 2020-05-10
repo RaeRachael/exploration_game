@@ -53,13 +53,9 @@ class Player < Moveable
     end
   end
 
- def move_player(x,y)
-   return $current_level.level[y][x] != "-"
- end
-
  def status
-   $current_level.position_check
-   $current_level.print_to_screen
+   position_check
+   print_to_screen
  end
 end
 

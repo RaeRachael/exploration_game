@@ -15,7 +15,6 @@ end
 
 $player = Player.new(1,1)
 $lvl_num = 0
-$current_level = Level.new
 level_load
 
 loop do

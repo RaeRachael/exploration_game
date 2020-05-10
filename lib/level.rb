@@ -1,38 +1,29 @@
-class Level
 
-#  attr_accessor :level
-
-  def initialize
-    @level = []
-    @save = []
+def print_to_screen
+  @to_print = $tile.map {|line| line.map {|tile| tile.string }}
+  @to_print[$player.y][$player.x] = " o "
+  if $monsters
+    $monsters.each { |monster| @to_print[monster.y][monster.x] = " X " }
   end
+  print_level
+end
 
-  def print_to_screen
-    @to_print = $tile.map {|line| line.map {|tile| tile.string }}
-    @to_print[$player.y][$player.x] = " o "
-    if $monsters
-      $monsters.each { |monster| @to_print[monster.y][monster.x] = " X " }
-    end
-    print_level
-  end
-
-  def position_check
-    if $monsters
-      $monsters.each do |monster|
-        if $player.y == monster.y && $player.x == monster.x
-          print_to_screen
-          puts "you are dead"
-          exit
-        end
+def position_check
+  if $monsters
+    $monsters.each do |monster|
+      if $player.y == monster.y && $player.x == monster.x
+        print_to_screen
+        puts "you are dead"
+        exit
       end
     end
-    $tile[$player.y][$player.x].player_interaction
   end
+  $tile[$player.y][$player.x].player_interaction
+end
 
-  def print_level
-    @to_print.each { |slice| puts slice.join("").center(16) }
-    puts
-  end
+def print_level
+  @to_print.each { |slice| puts slice.join("").center(16) }
+  puts
 end
 
 def level_load
@@ -58,11 +49,11 @@ def level_load
             "-       S-",
             "----------"],
            ["-----------",
-            "-p        -",
+            "-p   |    -",
             "-    -    -",
             "-    -    -",
             "- X  -   X-",
-            "-    -   S-",
+            "-   k-   S-",
             "-----------"],
            ["-----------",
             "-p        -",

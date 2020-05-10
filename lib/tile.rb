@@ -46,7 +46,7 @@ class Treasure < Tile
   end
 
   def player_interaction
-    $current_level.print_to_screen
+    print_to_screen
     puts "you are winner"
     exit
   end
