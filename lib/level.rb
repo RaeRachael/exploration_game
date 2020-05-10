@@ -1,6 +1,6 @@
 class Level
 
-  attr_accessor :level
+#  attr_accessor :level
 
   def initialize
     @level = []
@@ -8,30 +8,20 @@ class Level
   end
 
   def print_to_screen
-    @level[$player.y][$player.x] = "o"
+    @to_print = $tile.map {|line| line.map {|tile| tile.string }}
+    @to_print[$player.y][$player.x] = " o "
     if $monsters
-      $monsters.each_with_index { |monster,i| @save[i] = @level[monster.y][monster.x]
-       @level[monster.y][monster.x] = "X" }
+      $monsters.each { |monster| @to_print[monster.y][monster.x] = " X " }
     end
     print_level
-    @level[$player.y][$player.x] = " "
-    if $monsters
-      $monsters.each_with_index do |monster,i|
-        if @save[i] == "X"
-          @level[monster.y][monster.x] = " "
-        else
-          @level[monster.y][monster.x] = @save[i]
-        end
-      end
-    end
   end
 
   def position_check
     if $monsters
       $monsters.each do |monster|
         if $player.y == monster.y && $player.x == monster.x
+          print_to_screen
           puts "you are dead"
-          print_death_location
           exit
         end
       end
@@ -39,13 +29,8 @@ class Level
     $tile[$player.y][$player.x].player_interaction
   end
 
-  def print_death_location
-    @level[$player.y][$player.x] = "X"
-    print_level
-  end
-
   def print_level
-    @level.each { |slice| puts slice.center(16) }
+    @to_print.each { |slice| puts slice.join("").center(16) }
     puts
   end
 end
@@ -87,7 +72,7 @@ def level_load
             "-       Xt-",
             "-----------"]
 
-  $current_level.level = levels[$lvl_num]
+#  $current_level.level = levels[$lvl_num]
   $player.x, $player.y = 1, 1
   level = levels[$lvl_num]
   $tile = level.map do |line, y|

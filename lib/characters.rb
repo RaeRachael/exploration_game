@@ -89,6 +89,6 @@ class Monster < Moveable
 
   def move_monster(x,y)
     $monsters.each { |monster| return false if x == monster.x && y == monster.y }
-    return $current_level.level[y][x] != "-"
+    return !$tile[y][x].blocks
   end
 end
