@@ -84,7 +84,9 @@ class Monster < Moveable
   end
 
   def move_monster(x,y)
-    $monsters.each { |monster| return false if x == monster.x && y == monster.y }
+    $monsters.each do |monster|
+      return false if x == monster.x && y == monster.y
+    end
     return !$tile[y][x].blocks_monster
   end
 end

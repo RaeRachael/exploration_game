@@ -1,7 +1,7 @@
 class Tile
   attr_reader :blocks_player, :blocks_monster, :string
   def player_interaction
-  end 
+  end
 end
 
 class Empty < Tile
@@ -24,8 +24,7 @@ class Stairs < Tile
 
   def player_interaction
     $lvl_num += 1
-    print_to_screen
-    puts "found stairs leading up"
+    print_to_screen("found stairs leading up")
     sleep(1)
     level_load
   end
@@ -47,8 +46,7 @@ class Treasure < Tile
   end
 
   def player_interaction
-    print_to_screen
-    puts "you are winner"
+    print_to_screen("you are winner")
     exit
   end
 end
