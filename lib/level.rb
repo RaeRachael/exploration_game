@@ -26,7 +26,6 @@ class Level
         end
       end
     end
-    puts $tile[$player.y][$player.x]
     $tile[$player.y][$player.x].player_interaction
   end
 
@@ -86,7 +85,6 @@ def level_load
       char = into_tile(char)
     end
   end
-  puts $player.x, $player.y
   add_moveables_in(levels[$lvl_num])
 end
 
