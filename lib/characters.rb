@@ -40,13 +40,13 @@ class Player < Moveable
   def check_and_move_player(character, move)
     case move
     when "w"
-      character.y -= 1 if move_player(character.x, (character.y - 1))
+      character.y -= 1 unless $tile_map[character.y - 1][character.x].blockable()
     when "a"
-      character.x -= 1 if move_player((character.x - 1), character.y )
+      character.x -= 1 unless $tile_map[character.y][character.x - 1].blockable()
     when "s"
-      character.y += 1 if move_player(character.x, (character.y + 1))
+      character.y += 1 unless $tile_map[character.y + 1][character.x].blockable()
     when "d"
-      character.x += 1 if move_player((character.x + 1), character.y)
+      character.x += 1 unless $tile_map[character.y][character.x + 1].blockable()
     end
   end
 

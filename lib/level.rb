@@ -96,7 +96,28 @@ def level_load
 
   $current_level.level = levels[$lvl_num]
   $player.x, $player.y = 1, 1
-  add_monsters_in(levels[$lvl_num])
+  level = levels[$lvl_num]
+  $tile_map = level.map do |line, y|
+    line.split("").map do |char, x|
+      char = into_tile(char)
+    end
+  end
+  add_monsters_in(level)
+end
+
+def into_tile(str)
+  case str
+  when "-"
+    return Wall.new
+  when "S"
+    return Stairs.new
+  when "t"
+    return Treasure.new
+  when " "
+    return Empty.new
+  else
+    return Empty.new
+  end
 end
 
 def add_monsters_in(level)

@@ -1,6 +1,7 @@
 
 require_relative 'characters'
 require_relative 'level'
+require_relative 'tile'
 
 
 def time_check
@@ -22,5 +23,5 @@ loop do
   $player.move
   if $monsters && time_check
     $monsters.each { |monster| monster.move }
-  end 
+  end
 end
