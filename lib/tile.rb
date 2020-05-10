@@ -20,6 +20,9 @@ class Stairs < Tile
 
   def player_interaction
     $lvl_num += 1
+    print_to_screen
+    puts "found stairs leading up"
+    sleep(1)
     level_load
   end
 end

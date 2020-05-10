@@ -37,19 +37,19 @@ class Player < Moveable
   end
 
   def move
-    check_and_move_player($player, user_move)
+    check_and_move_player(user_move)
   end
 
-  def check_and_move_player(character, move)
+  def check_and_move_player(move)
     case move
     when "w"
-      character.y -= 1 unless $tile[character.y - 1][character.x].blocks
+      @y -= 1 unless $tile[@y - 1][@x].blocks
     when "a"
-      character.x -= 1 unless $tile[character.y][character.x - 1].blocks
+      @x -= 1 unless $tile[@y][@x - 1].blocks
     when "s"
-      character.y += 1 unless $tile[character.y + 1][character.x].blocks
+      @y += 1 unless $tile[@y + 1][@x].blocks
     when "d"
-      character.x += 1 unless $tile[character.y][character.x + 1].blocks
+      @x += 1 unless $tile[@y][@x + 1].blocks
     end
   end
 
@@ -66,23 +66,21 @@ class Monster < Moveable
   end
 
   def move
-    return if $monsters == nil
+  #  return if $monsters == nil
     possible_moves = ["w","a","s","d",nil,nil]
-    $monsters.each do |monster|
-      check_and_move_monster(monster,possible_moves.sample)
-    end
+    check_and_move_monster(possible_moves.sample)
   end
 
-  def check_and_move_monster(character, move)
+  def check_and_move_monster(move)
     case move
     when "w"
-      character.y -= 1 if move_monster(character.x, (character.y - 1))
+      @y -= 1 if move_monster(@x, (@y - 1))
     when "a"
-      character.x -= 1 if move_monster((character.x - 1), character.y )
+      @x -= 1 if move_monster((@x - 1), @y)
     when "s"
-      character.y += 1 if move_monster(character.x, (character.y + 1))
+      @y += 1 if move_monster(@x, (@y + 1))
     when "d"
-      character.x += 1 if move_monster((character.x + 1), character.y)
+      @x += 1 if move_monster((@x + 1), @y)
     end
   end
 
