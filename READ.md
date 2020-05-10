@@ -1,9 +1,9 @@
-## Attempt to make a baisc frogger-like game
+## Attempt to make a basic dougeon-clawer game
 
-to play 
+to play
 ```shell
 ruby ./lib/game
 ```
 
-move yourself('o') to the stairs('S') with wasd keys, avoid the monsters('X').
-try to find the treasure('t'). good luck :) 
+move yourself('o') to the stairs('S') with wasd keys, avoid the monsters('X'). Doors('|') need keys('k') to be opened.
+try to find the treasure('t'). good luck :)
