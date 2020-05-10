@@ -1,8 +1,5 @@
 class Tile
   attr_reader :blocks, :string
-
-  def initialize
-  end
 end
 
 class Empty < Tile

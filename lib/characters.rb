@@ -91,3 +91,12 @@ class Monster < Moveable
     return !$tile[y][x].blocks
   end
 end
+
+def time_check
+  $start ||= Time.now
+  if Time.now - $start > 0.5
+    $start = Time.now
+    return true
+  end
+  false
+end
