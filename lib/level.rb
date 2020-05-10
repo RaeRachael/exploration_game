@@ -36,14 +36,7 @@ class Level
         end
       end
     end
-    if @level[$player.y][$player.x] == "S"
-      puts "found the stairs, going up to the next level"
-      return true
-    end
-    if @level[$player.y][$player.x] == "t"
-      puts "found the treasure, you winner!!"
-      exit
-    end
+    $tile[$player.y][$player.x].player_interaction
   end
 
   def print_death_location
@@ -58,20 +51,20 @@ class Level
 end
 
 def level_load
-  levels = ["-----------",
-            "- -       -",
-            "- - ----- -",
-            "- - -     -",
-            "- - -  ----",
-            "-   -    S-",
-            "-----------"],
-           ["-----------",
-            "-         -",
-            "-         -",
-            "-         -",
-            "-       X -",
-            "-        S-",
-            "-----------"],
+  levels = ["----------",
+            "- -      -",
+            "- - ---- -",
+            "- - -    -",
+            "- - - ----",
+            "-   -   S-",
+            "----------"],
+           ["----------",
+            "-        -",
+            "-        -",
+            "-        -",
+            "-      X -",
+            "-       S-",
+            "----------"],
            ["-----------",
             "-         -",
             "-    -    -",
@@ -97,7 +90,7 @@ def level_load
   $current_level.level = levels[$lvl_num]
   $player.x, $player.y = 1, 1
   level = levels[$lvl_num]
-  $tile_map = level.map do |line, y|
+  $tile = level.map do |line, y|
     line.split("").map do |char, x|
       char = into_tile(char)
     end

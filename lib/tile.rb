@@ -1,5 +1,5 @@
 class Tile
-  attr_reader :blockable
+  attr_reader :blocks, :string
 
   def initialize
   end
@@ -7,7 +7,8 @@ end
 
 class Empty < Tile
   def initialize
-    @blockable = false
+    @blocks = false
+    @string = "   "
   end
 
   def player_interaction
@@ -16,7 +17,8 @@ end
 
 class Stairs < Tile
   def initialize
-    @blockable = false
+    @blocks = false
+    @string = " S "
   end
 
   def player_interaction
@@ -26,9 +28,10 @@ class Stairs < Tile
 end
 
 class Wall < Tile
-  attr_reader :blockable
+  #attr_reader :blocks
   def initialize
-    @blockable = true
+    @blocks = true
+    @string = "///"
   end
 
   def player_interaction
@@ -38,7 +41,8 @@ end
 
 class Treasure < Tile
   def initialize
-    @blockable
+    @blocks = false
+    @string = " t "
   end
 
   def player_interaction

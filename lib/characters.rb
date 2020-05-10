@@ -40,13 +40,13 @@ class Player < Moveable
   def check_and_move_player(character, move)
     case move
     when "w"
-      character.y -= 1 unless $tile_map[character.y - 1][character.x].blockable()
+      character.y -= 1 unless $tile[character.y - 1][character.x].blocks
     when "a"
-      character.x -= 1 unless $tile_map[character.y][character.x - 1].blockable()
+      character.x -= 1 unless $tile[character.y][character.x - 1].blocks
     when "s"
-      character.y += 1 unless $tile_map[character.y + 1][character.x].blockable()
+      character.y += 1 unless $tile[character.y + 1][character.x].blocks
     when "d"
-      character.x += 1 unless $tile_map[character.y][character.x + 1].blockable()
+      character.x += 1 unless $tile[character.y][character.x + 1].blocks
     end
   end
 
@@ -55,10 +55,7 @@ class Player < Moveable
  end
 
  def status
-   if $current_level.position_check
-     $lvl_num += 1
-     level_load
-   end
+   $current_level.position_check
    $current_level.print_to_screen
  end
 end
