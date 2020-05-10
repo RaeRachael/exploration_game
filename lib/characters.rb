@@ -12,8 +12,11 @@ end
 
 class Player < Moveable
 
+  attr_accessor :key
+
   def initialize (x, y)
     super(x,y)
+    @key = 0
   end
 
   require 'io/console'

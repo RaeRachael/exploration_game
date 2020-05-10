@@ -51,3 +51,32 @@ class Treasure < Tile
     exit
   end
 end
+
+class Key < Tile
+  def initialize
+    @blocks = false
+    @string = " k "
+  end
+
+  def player_interaction
+    $player.key += 1
+    $tile[$player.y][$player.x] = Empty.new
+  end
+end
+
+class Door < Tile
+  def initialize
+    @blocks = true
+    @string = " | "
+  end
+
+  def blocks
+    return false if $player.key >0
+    true
+  end
+
+  def player_interaction
+    $player.key -= 1
+    $tile[$player.y][$player.x] = Empty.new
+  end
+end
