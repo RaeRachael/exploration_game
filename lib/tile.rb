@@ -1,10 +1,13 @@
 class Tile
-  attr_reader :blocks, :string
+  attr_reader :blocks_player, :blocks_monster, :string
+  def player_interaction
+  end 
 end
 
 class Empty < Tile
   def initialize
-    @blocks = false
+    @blocks_player = false
+    @blocks_monster = false
     @string = "   "
   end
 
@@ -14,7 +17,8 @@ end
 
 class Stairs < Tile
   def initialize
-    @blocks = false
+    @blocks_player = false
+    @blocks_monster = false
     @string = " S "
   end
 
@@ -28,20 +32,17 @@ class Stairs < Tile
 end
 
 class Wall < Tile
-  #attr_reader :blocks
   def initialize
-    @blocks = true
+    @blocks_player = true
+    @blocks_monster = true
     @string = "///"
-  end
-
-  def player_interaction
-    raise StandardError, "nothing should be in the wall"
   end
 end
 
 class Treasure < Tile
   def initialize
-    @blocks = false
+    @blocks_player = false
+    @blocks_monster = false
     @string = " t "
   end
 
@@ -54,7 +55,8 @@ end
 
 class Key < Tile
   def initialize
-    @blocks = false
+    @blocks_player = false
+    @blocks_monster = false
     @string = " k "
   end
 
@@ -66,17 +68,18 @@ end
 
 class Door < Tile
   def initialize
-    @blocks = true
+    @blocks_monster = true
     @string = " | "
+    @locked = true
   end
 
-  def blocks
-    return false if $player.key >0
-    true
-  end
-
-  def player_interaction
-    $player.key -= 1
-    $tile[$player.y][$player.x] = Empty.new
+  def blocks_player
+    if @locked
+      if $player.key >0
+        @locked = false
+        $player.key -= 1
+      end
+    end
+    @locked
   end
 end

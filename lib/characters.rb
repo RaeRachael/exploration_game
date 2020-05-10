@@ -43,13 +43,13 @@ class Player < Moveable
   def check_and_move_player(move)
     case move
     when "w"
-      @y -= 1 unless $tile[@y - 1][@x].blocks
+      @y -= 1 unless $tile[@y - 1][@x].blocks_player
     when "a"
-      @x -= 1 unless $tile[@y][@x - 1].blocks
+      @x -= 1 unless $tile[@y][@x - 1].blocks_player
     when "s"
-      @y += 1 unless $tile[@y + 1][@x].blocks
+      @y += 1 unless $tile[@y + 1][@x].blocks_player
     when "d"
-      @x += 1 unless $tile[@y][@x + 1].blocks
+      @x += 1 unless $tile[@y][@x + 1].blocks_player
     end
   end
 
@@ -66,7 +66,6 @@ class Monster < Moveable
   end
 
   def move
-  #  return if $monsters == nil
     possible_moves = ["w","a","s","d",nil,nil]
     check_and_move_monster(possible_moves.sample)
   end
@@ -86,7 +85,7 @@ class Monster < Moveable
 
   def move_monster(x,y)
     $monsters.each { |monster| return false if x == monster.x && y == monster.y }
-    return !$tile[y][x].blocks
+    return !$tile[y][x].blocks_monster
   end
 end
 
