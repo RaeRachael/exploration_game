@@ -15,18 +15,47 @@ class Empty < Tile
   end
 end
 
-class Stairs < Tile
+class StairsUp < Tile
   def initialize
-    @blocks_player = false
     @blocks_monster = false
     @string = " S "
+    @move_on = false
+  end
+
+  def blocks_player
+    @move_on = true
+    return false
   end
 
   def player_interaction
-    $lvl_num += 1
-    print_to_screen("found stairs leading up")
-    sleep(1)
-    level_load
+    if @move_on
+      $lvl_num += 1
+      print_to_screen("found stairs leading up")
+      sleep(1)
+      level_load
+    end
+  end
+end
+
+class StairsDown < Tile
+  def initialize
+    @blocks_monster = false
+    @string = " D "
+    @move_on = false
+  end
+
+  def blocks_player
+    @move_on = true
+    return false
+  end
+
+  def player_interaction
+    if @move_on
+      $lvl_num -= 1
+      print_to_screen("found stairs leading down")
+      sleep(1)
+      level_load
+    end
   end
 end
 
@@ -61,6 +90,8 @@ class Key < Tile
   def player_interaction
     $player.key += 1
     $tile[$player.y][$player.x] = Empty.new
+    puts $levels[$lvl_num][$player.y][$player.x]
+    $levels[$lvl_num][$player.y][$player.x] = " "
   end
 end
 

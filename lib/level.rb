@@ -26,7 +26,7 @@ def print_level(string)
 end
 
 def level_load
-  levels = [["----------",
+  $levels ||= [["----------",
             "-p-      -",
             "- - ---- -",
             "- - -    -",
@@ -34,48 +34,48 @@ def level_load
             "-   -   S-",
             "----------"],
            ["----------",
+            "-  X     -",
+            "-        -",
+            "-        -",
+            "- ---    -",
+            "-  S-   D-",
+            "----------"],
+           ["----------",
             "-k- |    -",
             "- - ---- -",
             "- - -    -",
-            "- - - ----",
-            "-  p-   S-",
-            "----------"],
-           ["----------",
-            "-p       -",
-            "-        -",
-            "-        -",
-            "-      X -",
-            "-       S-",
+            "-   - ----",
+            "- pD-   S-",
             "----------"],
            ["-----------",
-            "-p   |    -",
+            "-SX  -k  X-",
             "-    -    -",
             "-    -    -",
-            "- X  -   X-",
-            "-   k-   S-",
+            "-    -    -",
+            "-    |   D-",
             "-----------"],
            ["-----------",
-            "-p        -",
+            "-D        -",
             "-         -",
             "-         -",
             "-       XX-",
             "-       XS-",
             "-----------"],
            ["-----------",
-            "-        p-",
-            "- ---------",
-            "- -     X -",
-            "-       Xt-",
             "-       X -",
+            "-        t-",
+            "- -     X -",
+            "- ---------",
+            "-        D-",
             "-----------"]]
 
 
-  $tile = levels[$lvl_num].map do |line, y|
+  $tile = $levels[$lvl_num].map do |line, y|
     line.split("").map do |char, x|
       char = into_tile(char)
     end
   end
-  add_moveables_in(levels[$lvl_num])
+  add_moveables_in($levels[$lvl_num])
 end
 
 def into_tile(str)
@@ -83,7 +83,9 @@ def into_tile(str)
   when "-"
     return Wall.new
   when "S"
-    return Stairs.new
+    return StairsUp.new
+  when "D"
+    return StairsDown.new
   when "t"
     return Treasure.new
   when "k"
