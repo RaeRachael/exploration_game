@@ -5,7 +5,7 @@ require_relative 'tile'
 
 def start_game
   $player = Player.new(1,1)
-  $lvl_num = 2
+  $lvl_num = 0
   level_load
 end
 

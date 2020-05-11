@@ -32,7 +32,7 @@ class Player < Moveable
 
   def read_move
     chr = Timeout::timeout(0.05) { $stdin.getch }
-    return chr if chr.match(/[wasd]/)
+    return chr if chr.match(/[wasdp]/)
   rescue Timeout::Error
   end
 
@@ -50,6 +50,9 @@ class Player < Moveable
       @y += 1 unless $tile[@y + 1][@x].blocks_player
     when "d"
       @x += 1 unless $tile[@y][@x + 1].blocks_player
+    when "p"
+      puts "exit game"
+      exit
     end
   end
 
