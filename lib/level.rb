@@ -107,7 +107,6 @@ def add_moveables_in(level)
         basic = Monster.new(x,y)
         $monsters << basic
       end
-      $player.x, $player.y = x, y if char == "p"
     end
   end
 end
