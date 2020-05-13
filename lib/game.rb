@@ -20,7 +20,7 @@ end
 
 def main_loop
   loop do
-    $player.status
+    status
     $player.move
     if $monsters && time_check
       $monsters.each { |monster| monster.move }

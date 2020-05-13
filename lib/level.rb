@@ -1,3 +1,7 @@
+def status
+  position_check
+  print_to_screen
+end
 
 def print_to_screen(string = "")
   @to_print = $tile.map {|line| line.map {|tile| tile.string }}

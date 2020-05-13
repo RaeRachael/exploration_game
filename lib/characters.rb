@@ -55,11 +55,6 @@ class Player < Moveable
       exit
     end
   end
-
- def status
-   position_check
-   print_to_screen
- end
 end
 
 class Monster < Moveable
