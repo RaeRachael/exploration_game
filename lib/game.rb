@@ -20,6 +20,18 @@ def lvl_up
   $lvl_num += 1
 end
 
+def player_keys
+  $player.key
+end
+
+def get_key
+  $player.key += 1
+end
+
+def use_key
+  $player.key -= 1
+end
+
 def start_game
   $player = Player.new(1,1)
   $lvl_num = 0

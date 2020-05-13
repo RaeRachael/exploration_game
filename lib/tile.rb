@@ -88,7 +88,7 @@ class Key < Tile
   end
 
   def player_interaction
-    $player.key += 1
+    get_key
     $tile[$player.y][$player.x] = Empty.new
     puts $levels[$lvl_num][$player.y][$player.x]
     $levels[$lvl_num][$player.y][$player.x] = " "
@@ -104,9 +104,9 @@ class Door < Tile
 
   def blocks_player
     if @locked
-      if $player.key >0
+      if player_keys > 0
         @locked = false
-        $player.key -= 1
+        use_key
       end
     end
     @locked
