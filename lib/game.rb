@@ -1,5 +1,5 @@
 
-require_relative 'characters'
+require_relative 'moveable'
 require_relative 'level'
 require_relative 'tile'
 
@@ -10,6 +10,14 @@ def blocked?(y,x,who)
   when "monster"
     $tile[y][x].blocks_monster
   end
+end
+
+def lvl_down
+  $lvl_num -= 1
+end
+
+def lvl_up
+  $lvl_num += 1
 end
 
 def start_game

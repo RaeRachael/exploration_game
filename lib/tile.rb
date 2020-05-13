@@ -29,7 +29,7 @@ class StairsUp < Tile
 
   def player_interaction
     if @move_on
-      $lvl_num += 1
+      lvl_up
       print_to_screen("found stairs leading up")
       sleep(1)
       level_load
@@ -51,7 +51,7 @@ class StairsDown < Tile
 
   def player_interaction
     if @move_on
-      $lvl_num -= 1
+      lvl_down
       print_to_screen("found stairs leading down")
       sleep(1)
       level_load

@@ -79,7 +79,7 @@ def level_load
       char = into_tile(char)
     end
   end
-  add_moveables_in($levels[$lvl_num])
+  add_monsters_in($levels[$lvl_num])
 end
 
 def into_tile(str)
@@ -103,7 +103,7 @@ def into_tile(str)
   end
 end
 
-def add_moveables_in(level)
+def add_monsters_in(level)
   $monsters = []
   level.each_with_index do |line, y|
     line.split("").each_with_index do |char, x|
