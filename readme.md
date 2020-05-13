@@ -38,3 +38,9 @@ As I was still attempting to follow the TDD process at this time, there was quit
 An additional problem that I had with coding #read_move was that I did want the game to wait indefinitely for the user to input something, to work around this I found that Timeout could solve the issue, as if i run the #getch inside a Timeout block it will escape out of after a set time, so that the rest of the code can run (and in this case allows the monsters to move around the level).
 
 A slight aside about the #getch method is that it makes abouting the process being run by ^c impossible, so I had to include a quit input earlier than expect, so #read_move can return values related to moving the player character and also to quite the game.
+
+### aims for the next step
+I would like to remove or at least reduce the reliance on the global variables that i current have.
+I think that at some point there be a menu for the user with save, load options as well at to play.
+I think trying to implement different monster types, and possibly a way to fight back would be interesting.
+Also printing out only the local environment of the level would lead to greater possibilities of the level design in terms of size.
