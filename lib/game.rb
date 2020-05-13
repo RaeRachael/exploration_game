@@ -3,6 +3,15 @@ require_relative 'characters'
 require_relative 'level'
 require_relative 'tile'
 
+def blocked?(y,x,who)
+  case who
+  when "player"
+    $tile[y][x].blocks_player
+  when "monster"
+    $tile[y][x].blocks_monster
+  end
+end
+
 def start_game
   $player = Player.new(1,1)
   $lvl_num = 0

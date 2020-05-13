@@ -43,13 +43,13 @@ class Player < Moveable
   def check_and_move_player(move)
     case move
     when "w"
-      @y -= 1 unless $tile[@y - 1][@x].blocks_player
+      @y -= 1 unless blocked?(@y - 1, @x, "player")
     when "a"
-      @x -= 1 unless $tile[@y][@x - 1].blocks_player
+      @x -= 1 unless blocked?(@y, @x - 1, "player")
     when "s"
-      @y += 1 unless $tile[@y + 1][@x].blocks_player
+      @y += 1 unless blocked?(@y + 1, @x, "player")
     when "d"
-      @x += 1 unless $tile[@y][@x + 1].blocks_player
+      @x += 1 unless blocked?(@y, @x + 1, "player")
     when "p"
       puts "exit game"
       exit
@@ -76,21 +76,21 @@ class Monster < Moveable
   def check_and_move_monster(move)
     case move
     when "w"
-      @y -= 1 if move_monster(@x, (@y - 1))
+      @y -= 1 unless blocked?(@y - 1, @x, "monster") || monster_blocks(@y - 1, @x)
     when "a"
-      @x -= 1 if move_monster((@x - 1), @y)
+      @x -= 1 unless blocked?(@y, @x - 1, "monster") || monster_blocks(@y, @x - 1)
     when "s"
-      @y += 1 if move_monster(@x, (@y + 1))
+      @y += 1 unless blocked?(@y + 1, @x, "monster") || monster_blocks(@y + 1, @x)
     when "d"
-      @x += 1 if move_monster((@x + 1), @y)
+      @x += 1 unless blocked?(@y, @x + 1, "monster") || monster_blocks(@y, @x + 1)
     end
   end
 
-  def move_monster(x,y)
+  def monster_blocks(y,x)
     $monsters.each do |monster|
-      return false if x == monster.x && y == monster.y
+      return true if x == monster.x && y == monster.y
     end
-    return !$tile[y][x].blocks_monster
+    return false
   end
 end
 
