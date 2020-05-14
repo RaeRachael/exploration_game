@@ -8,9 +8,11 @@ try to find the treasure('t'). good luck :)
 exit the game with 'p
 
 to play
+
 ```shell
-ruby ./lib/game
+irb -r ./lib/game.rb
 ```
+*current push doesn't work with ruby ./lib/game.rb*
 
 Example screenshot of the game
 
