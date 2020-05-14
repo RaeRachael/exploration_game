@@ -1,11 +1,11 @@
-require_relative 'game'
+require_relative 'interface'
 
 class Tile
   attr_reader :blocks_player, :blocks_monster, :string
   def initialize
     @blocks_player = false
     @blocks_monster = false
-    @test = Game.new
+    @interface = Interface.new
   end
   def player_interaction
   end
@@ -34,10 +34,10 @@ class StairsUp < Tile
 
   def player_interaction
     if @move_on
-      @test.lvl_up
-      @test.print_to_screen("found stairs leading up")
+      @interface.lvl_up
+      @interface.print_to_screen("found stairs leading up")
       sleep(1)
-      @test.level_load
+      @interface.level_load
     end
   end
 end
@@ -56,10 +56,10 @@ class StairsDown < Tile
 
   def player_interaction
     if @move_on
-      @test.lvl_down
-      @test.print_to_screen("found stairs leading down")
+      @interface.lvl_down
+      @interface.print_to_screen("found stairs leading down")
       sleep(1)
-      @test.level_load
+      @interface.level_load
     end
   end
 end
@@ -79,7 +79,7 @@ class Treasure < Tile
   end
 
   def player_interaction
-    @test.print_to_screen("you are winner")
+    @interface.print_to_screen("you are winner")
     exit
   end
 end
@@ -93,8 +93,8 @@ class Key < Tile
   end
 
   def player_interaction
-    @test.get_key
-    @test.remove_key_from_level
+    @interface.get_key
+    @interface.remove_key_from_level
   end
 end
 
@@ -108,9 +108,9 @@ class Door < Tile
 
   def blocks_player
     if @locked
-      if @test.player_keys > 0
+      if @interface.player_keys > 0
         @locked = false
-        @test.use_key
+        @interface.use_key
       end
     end
     @locked
