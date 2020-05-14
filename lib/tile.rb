@@ -89,9 +89,7 @@ class Key < Tile
 
   def player_interaction
     get_key
-    $tile[$player.y][$player.x] = Empty.new
-    puts $levels[$lvl_num][$player.y][$player.x]
-    $levels[$lvl_num][$player.y][$player.x] = " "
+    remove_key_from_level
   end
 end
 

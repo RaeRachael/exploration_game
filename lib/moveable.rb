@@ -1,4 +1,3 @@
-
 class Moveable
 
   attr_accessor :x, :y
@@ -80,20 +79,4 @@ class Monster < Moveable
       @x += 1 unless blocked?(@y, @x + 1, "monster") || monster_blocks(@y, @x + 1)
     end
   end
-
-  def monster_blocks(y,x)
-    $monsters.each do |monster|
-      return true if x == monster.x && y == monster.y
-    end
-    return false
-  end
-end
-
-def time_check
-  $start ||= Time.now
-  if Time.now - $start > 0.5
-    $start = Time.now
-    return true
-  end
-  false
 end
