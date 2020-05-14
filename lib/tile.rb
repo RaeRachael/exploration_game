@@ -1,13 +1,18 @@
+require_relative 'game'
+
 class Tile
   attr_reader :blocks_player, :blocks_monster, :string
+  def initialize
+    @blocks_player = false
+    @blocks_monster = false
+    @test = Game.new
+  end
   def player_interaction
   end
 end
 
 class Empty < Tile
   def initialize
-    @blocks_player = false
-    @blocks_monster = false
     @string = "   "
   end
 
@@ -17,9 +22,9 @@ end
 
 class StairsUp < Tile
   def initialize
-    @blocks_monster = false
     @string = " S "
     @move_on = false
+    super
   end
 
   def blocks_player
@@ -29,19 +34,19 @@ class StairsUp < Tile
 
   def player_interaction
     if @move_on
-      lvl_up
-      print_to_screen("found stairs leading up")
+      @test.lvl_up
+      @test.print_to_screen("found stairs leading up")
       sleep(1)
-      level_load
+      @test.level_load
     end
   end
 end
 
 class StairsDown < Tile
   def initialize
-    @blocks_monster = false
     @string = " D "
     @move_on = false
+    super
   end
 
   def blocks_player
@@ -51,10 +56,10 @@ class StairsDown < Tile
 
   def player_interaction
     if @move_on
-      lvl_down
-      print_to_screen("found stairs leading down")
+      @test.lvl_down
+      @test.print_to_screen("found stairs leading down")
       sleep(1)
-      level_load
+      @test.level_load
     end
   end
 end
@@ -69,13 +74,12 @@ end
 
 class Treasure < Tile
   def initialize
-    @blocks_player = false
-    @blocks_monster = false
     @string = " t "
+    super
   end
 
   def player_interaction
-    print_to_screen("you are winner")
+    @test.print_to_screen("you are winner")
     exit
   end
 end
@@ -85,11 +89,12 @@ class Key < Tile
     @blocks_player = false
     @blocks_monster = false
     @string = " k "
+    super
   end
 
   def player_interaction
-    get_key
-    remove_key_from_level
+    @test.get_key
+    @test.remove_key_from_level
   end
 end
 
@@ -98,13 +103,14 @@ class Door < Tile
     @blocks_monster = true
     @string = " | "
     @locked = true
+    super
   end
 
   def blocks_player
     if @locked
-      if player_keys > 0
+      if @test.player_keys > 0
         @locked = false
-        use_key
+        @test.use_key
       end
     end
     @locked
