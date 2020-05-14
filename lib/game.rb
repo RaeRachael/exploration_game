@@ -1,5 +1,35 @@
 require_relative 'interface'
 
+class Game
+  def initialize(interface)
+    @interface = interface
+  end
+
+  def start_game
+    @interface.create_player
+    @interface.set_lvl_num
+    @interface.level_load
+  end
+
+  def main_loop
+    loop do
+      status
+      @interface.player_move
+      @interface.monster_move if time_check
+    end
+  end
+
+  def status
+    position_check
+    @interface.print_to_screen
+  end
+
+  def position_check
+    @interface.same_space_as_a_monster
+    @interface.tile_interaction
+  end
+end
+
 def time_check
   @start ||= Time.now
   if Time.now - @start > 0.5
@@ -7,22 +37,6 @@ def time_check
     return true
   end
   false
-end
-
-def start_game
-  create_player
-  set_lvl_num
-  level_load
-end
-
-def status
-  position_check
-  print_to_screen
-end
-
-def position_check
-  same_space_as_a_monster
-  tile_interaction
 end
 
 def into_tile(str)
@@ -46,6 +60,8 @@ def into_tile(str)
   end
 end
 
-to_run = Interface.new
-to_run.start_game
-to_run.main_loop
+
+game = Game.new(Interface.new)
+
+game.start_game
+game.main_loop
