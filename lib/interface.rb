@@ -45,11 +45,6 @@ class Interface
     @@levels[@@lvl_num][@@player.y][@@player.x] = " "
   end
 
-  def status
-    position_check
-    print_to_screen
-  end
-
   def print_to_screen(string = "")
     @@to_print = @@tile.map {|line| line.map {|tile| tile.string }}
     @@to_print[@@player.y][@@player.x] = " o "
@@ -59,7 +54,7 @@ class Interface
     print_level(string)
   end
 
-  def position_check
+  def same_space_as_a_monster
     if @@monsters
       @@monsters.each do |monster|
         if @@player.y == monster.y && @@player.x == monster.x
@@ -68,6 +63,9 @@ class Interface
         end
       end
     end
+  end
+
+  def tile_interaction
     @@tile[@@player.y][@@player.x].player_interaction
   end
 
@@ -86,27 +84,6 @@ class Interface
     add_monsters_in(@@levels[@@lvl_num])
   end
 
-  def into_tile(str)
-    case str
-    when "-"
-      return Wall.new
-    when "S"
-      return StairsUp.new
-    when "D"
-      return StairsDown.new
-    when "t"
-      return Treasure.new
-    when "k"
-      return Key.new
-    when "|"
-      return Door.new
-    when " "
-      return Empty.new
-    else
-      return Empty.new
-    end
-  end
-
   def add_monsters_in(level)
     @@monsters = []
     level.each_with_index do |line, y|
@@ -120,9 +97,17 @@ class Interface
   end
 
   def start_game
-    @@player = Player.new(1,1)
-    @@lvl_num = 0
+    create_player
+    set_lvl_num
     level_load
+  end
+
+  def create_player
+    @@player = Player.new(1,1)
+  end
+
+  def set_lvl_num
+    @@lvl_num = 0
   end
 
   def main_loop
