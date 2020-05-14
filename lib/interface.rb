@@ -4,15 +4,6 @@ require_relative 'level'
 require_relative 'tile'
 
 class Interface
-  def time_check
-    @@start ||= Time.now
-    if Time.now - @@start > 0.5
-      @@start = Time.now
-      return true
-    end
-    false
-  end
-
   def blocked?(y, x, who)
     case who
     when "player"
