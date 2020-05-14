@@ -10,9 +10,8 @@ exit the game with 'p
 to play
 
 ```shell
-irb -r ./lib/game.rb
+ruby ./lib/game
 ```
-*current push doesn't work with ruby ./lib/game.rb*
 
 Example screenshot of the game
 
