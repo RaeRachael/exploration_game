@@ -20,12 +20,12 @@ class Interface
         char = into_tile(char)
       end
     end
-    add_monsters_in(@@levels[@@lvl_num])
+    add_monsters_in
   end
 
-  def add_monsters_in(level) #called - interface; needs - moveable
+  def add_monsters_in #called - interface; needs - moveable
     @@monsters = []
-    level.each_with_index do |line, y|
+    @@levels[@@lvl_num].each_with_index do |line, y|
       line.split("").each_with_index do |char, x|
         if char == "X"
           basic = Monster.new(x,y)
