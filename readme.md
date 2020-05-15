@@ -14,10 +14,17 @@ ruby ./lib/game
 ```
 
 Example screenshot of the game
-
- *add image in when created*
+![alt text](https://github.com/RaeRachael/exploration_game/blob/master/sample_screenshot.png)
 
 # comments about code plan, struggles and aims
+
+## Friday 15th May
+
+### struggles in achieving aims from last update (13th May)
+So the code had gotten a little complicated, such that it was hard to collect all the methods using the same global variable into one file. But by writing out what information each of the main methods needed in each of the files I had, it quickly became clear that the level of interaction between them could be the source of a new class that holds methods that deal with the interactions, I named the class Interface and used class variables to hold the instances of the Tile and Moveable classes that the Interface works with.
+A visual representation of the current code state.
+![alt text](https://github.com/RaeRachael/exploration_game/blob/master/explore_game_15_may.png)
+
 
 ## Wednesday 13th May
 
