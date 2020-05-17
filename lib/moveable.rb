@@ -3,6 +3,7 @@ require_relative 'interface'
 class Moveable
 
   attr_accessor :x, :y
+  attr_reader :interface
 
   def initialize(x, y)
     @y = y
@@ -25,15 +26,18 @@ class Player < Moveable
   require 'timeout'
 
   def user_move
+
     start = Time.now
     while Time.now - start < 0.5
       move = read_move
       return move if move
     end
+    ## @hold_input $stdin
   end
 
   def read_move
-    chr = Timeout::timeout(0.05) { $stdin.getch }
+    chr = Timeout::timeout(0.05) { ## until @hold_input = nil @hold_input.getch
+      $stdin.getch }
     return chr if chr.match(/[wasdp]/)
   rescue Timeout::Error
   end
