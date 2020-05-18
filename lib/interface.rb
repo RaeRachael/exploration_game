@@ -76,6 +76,11 @@ class Interface
     @@levels[@@lvl_num][@@player.y][@@player.x] = " "
   end
 
+  def turn_into_UnLocked #called - tile; needs - interface
+    @@tile[@@player.y][@@player.x] = DoorUnLocked.new
+    @@levels[@@lvl_num][@@player.y][@@player.x] = "\\"
+  end
+
   def print_to_screen(string = "") #called - game, interface, tile; needs -
     add_moveables_to_print
     print_level(string)

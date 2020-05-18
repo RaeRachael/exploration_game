@@ -55,6 +55,8 @@ def into_tile(str)
     return Door.new
   when " "
     return Empty.new
+  when "\\"
+    return DoorUnLocked.new
   else
     return Empty.new
   end

@@ -86,8 +86,6 @@ end
 
 class Key < Tile
   def initialize
-    @blocks_player = false
-    @blocks_monster = false
     @string = " k "
     super
   end
@@ -102,17 +100,27 @@ class Door < Tile
   def initialize
     @blocks_monster = true
     @string = " | "
-    @locked = true
     super
   end
 
   def blocks_player
-    if @locked
-      if @interface.player_keys > 0
-        @locked = false
-        @interface.use_key
-      end
+    if @interface.player_keys > 0
+      @interface.use_key
+      false
+    else
+      true
     end
-    @locked
+  end
+
+  def player_interaction
+    @interface.turn_into_UnLocked
+  end
+end
+
+class DoorUnLocked < Tile
+  def initialize
+    @blocks_monster = true
+    @string = " | "
+    super
   end
 end
