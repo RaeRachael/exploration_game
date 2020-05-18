@@ -32,12 +32,19 @@ class Player < Moveable
       move = read_move
       return move if move
     end
-    ## @hold_input $stdin
+    @hold_input = $stdin
+    @hold = true
   end
 
   def read_move
-    chr = Timeout::timeout(0.05) { ## until @hold_input = nil @hold_input.getch
-      $stdin.getch }
+    chr = Timeout::timeout(0.05) do
+      if @hold
+        @hold = false
+        @hold_input.to_s[0]
+      else
+        $stdin.getch
+      end
+    end
     return chr if chr.match(/[wasdp]/)
   rescue Timeout::Error
   end
