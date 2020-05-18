@@ -9,6 +9,7 @@ class Moveable
     @y = y
     @x = x
     @interface = Interface.new
+    @@hold = false
   end
 
 end
@@ -33,13 +34,13 @@ class Player < Moveable
       return move if move
     end
     @hold_input = $stdin
-    @hold = true
+    @@hold = true
   end
 
   def read_move
     chr = Timeout::timeout(0.05) do
-      if @hold
-        @hold = false
+      if @@hold
+        @@hold = false
         @hold_input.to_s[0]
       else
         $stdin.getch
@@ -77,6 +78,7 @@ class Monster < Moveable
   end
 
   def move
+    @@hold = true
     possible_moves = ["w","a","s","d",nil,nil]
     check_and_move_monster(possible_moves.sample)
   end
