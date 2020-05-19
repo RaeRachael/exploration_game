@@ -27,7 +27,6 @@ class Player < Moveable
   require 'timeout'
 
   def user_move
-
     start = Time.now
     while Time.now - start < 0.5
       move = read_move

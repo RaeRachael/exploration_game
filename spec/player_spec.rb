@@ -46,13 +46,11 @@ describe Player do
       $stdin = STDIN
     end
 
-    let(:input3) { StringIO.new("q")}
     it "return nothing, but runs for about 0.5s" do
-      $stdin = input3
+      allow($stdin).to receive(:getch).and_return("")
       start = Time.now
       player.user_move
-      expect(Time.now - start).to be_within(0.005).of(0.5)
-      $stdin = STDIN
+      expect(Time.now - start).to be_within(0.05).of(0.5)
     end
 
   end
