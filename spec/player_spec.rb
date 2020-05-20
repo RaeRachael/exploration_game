@@ -55,5 +55,23 @@ describe Player do
       end
     end
 
+    context "blocking tile" do
+      before do
+        allow_any_instance_of(Interface).to receive(:blocked?) {true}
+      end
+
+      let(:input2) { StringIO.new("fsqawdp") }
+      it "returns the /[wasdp]/ charactors entered in order,
+      and moves in the player in the correct way" do
+        $stdin = input2
+        expect{ player.move }.to change{ player.y }.by(0)  # s
+        expect{ player.move }.to change{ player.x }.by(0) # a
+        expect{ player.move }.to change{ player.y }.by(0) # w
+        expect{ player.move }.to change{ player.x }.by(0)  # d
+        expect(player.user_move).to eq("p") # pause menu not yet created
+        $stdin = STDIN
+      end
+    end
+
   end
 end
