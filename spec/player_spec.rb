@@ -29,11 +29,9 @@ describe Player do
     require 'io/console'
     require 'stringio'
 
-    it "return nothing, but runs for about 0.5s" do
+    it "getch method doesn't wait for 0.5s" do
       allow_any_instance_of(IO).to receive(:getch) { sleep(5) }
-      start = Time.now
-      player.user_move
-      expect(Time.now - start).to be_within(0.05).of(0.5)
+      expect { Timeout::timeout(0.5) {player.read_move } }.to_not raise_error
     end
   end
 
