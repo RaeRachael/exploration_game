@@ -7,8 +7,16 @@ class Moveable
   def initialize(x, y)
     @y = y
     @x = x
-    @interface = Interface.new
+    @@interface ||= Interface.new
     @@hold = false
+  end
+
+  def tile_blocked_for?(y, x, moveable)
+    if moveable == "monster"
+      @@interface.blocked?(y, x, moveable) || @@interface.monster_blocks(y, x)
+    elsif moveable == "player"
+      @@interface.blocked?(y, x, moveable)
+    end
   end
 
 end
@@ -51,13 +59,13 @@ class Player < Moveable
   def move
     case user_move
     when "w"
-      @y -= 1 unless @interface.blocked?(@y - 1, @x, "player")
+      @y -= 1 unless tile_blocked_for?(@y - 1, @x, "player")
     when "a"
-      @x -= 1 unless @interface.blocked?(@y, @x - 1, "player")
+      @x -= 1 unless tile_blocked_for?(@y, @x - 1, "player")
     when "s"
-      @y += 1 unless @interface.blocked?(@y + 1, @x, "player")
+      @y += 1 unless tile_blocked_for?(@y + 1, @x, "player")
     when "d"
-      @x += 1 unless @interface.blocked?(@y, @x + 1, "player")
+      @x += 1 unless tile_blocked_for?(@y, @x + 1, "player")
     when "p"
       puts "exit game"
       exit
@@ -80,13 +88,14 @@ class Monster < Moveable
     @@hold = true
     case possible_moves
     when "w"
-      @y -= 1 unless @interface.blocked?(@y - 1, @x, "monster") || @interface.monster_blocks(@y - 1, @x)
+      @y -= 1 unless tile_blocked_for?(@y - 1, @x, "monster")
     when "a"
-      @x -= 1 unless @interface.blocked?(@y, @x - 1, "monster") || @interface.monster_blocks(@y, @x - 1)
+      @x -= 1 unless tile_blocked_for?(@y, @x - 1, "monster")
     when "s"
-      @y += 1 unless @interface.blocked?(@y + 1, @x, "monster") || @interface.monster_blocks(@y + 1, @x)
+      @y += 1 unless tile_blocked_for?(@y + 1, @x, "monster")
     when "d"
-      @x += 1 unless @interface.blocked?(@y, @x + 1, "monster") || @interface.monster_blocks(@y, @x + 1)
+      @x += 1 unless tile_blocked_for?(@y, @x + 1, "monster")
     end
   end
+
 end
