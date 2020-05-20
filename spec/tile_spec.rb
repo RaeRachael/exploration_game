@@ -10,4 +10,9 @@ describe Tile do
     end
   end
 
+  describe '#player_interaction' do
+    it 'should be an empty method' do
+      expect(subject).to respond_to(:player_interaction).with(0).arguments
+    end
+  end
 end
