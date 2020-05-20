@@ -14,15 +14,14 @@ end
 class Empty < Tile
   def initialize
     @string = "   "
-    super
   end
 end
 
 class StairsUp < Tile
   def initialize
+    super
     @string = " S "
     @move_on = false
-    super
   end
 
   def blocks_player
@@ -42,9 +41,9 @@ end
 
 class StairsDown < Tile
   def initialize
+    super
     @string = " D "
     @move_on = false
-    super
   end
 
   def blocks_player
@@ -72,8 +71,8 @@ end
 
 class Treasure < Tile
   def initialize
-    @string = " t "
     super
+    @string = " t "
   end
 
   def player_interaction
@@ -84,8 +83,8 @@ end
 
 class Key < Tile
   def initialize
-    @string = " k "
     super
+    @string = " k "
   end
 
   def player_interaction
@@ -96,9 +95,9 @@ end
 
 class Door < Tile
   def initialize
+    super
     @blocks_monster = true
     @string = " | "
-    super
   end
 
   def blocks_player
@@ -119,6 +118,5 @@ class DoorUnLocked < Tile
   def initialize
     @blocks_monster = true
     @string = " | "
-    super
   end
 end
