@@ -50,11 +50,7 @@ class Player < Moveable
   end
 
   def move
-    check_and_move_player(user_move)
-  end
-
-  def check_and_move_player(move)
-    case move
+    case user_move
     when "w"
       @y -= 1 unless @interface.blocked?(@y - 1, @x, "player")
     when "a"
