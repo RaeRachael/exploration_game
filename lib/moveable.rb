@@ -70,16 +70,16 @@ class Monster < Moveable
 
   def initialize (x, y)
     super(x,y)
+    @possible_moves = ["w","a","s","d",nil,nil]
+  end
+
+  def possible_moves
+    @possible_moves.sample
   end
 
   def move
     @@hold = true
-    possible_moves = ["w","a","s","d",nil,nil]
-    check_and_move_monster(possible_moves.sample)
-  end
-
-  def check_and_move_monster(move)
-    case move
+    case possible_moves
     when "w"
       @y -= 1 unless @interface.blocked?(@y - 1, @x, "monster") || @interface.monster_blocks(@y - 1, @x)
     when "a"
