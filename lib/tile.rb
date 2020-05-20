@@ -116,6 +116,7 @@ end
 
 class DoorUnLocked < Tile
   def initialize
+    super
     @blocks_monster = true
     @string = " | "
   end
