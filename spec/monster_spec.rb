@@ -24,7 +24,7 @@ describe Monster do
   end
 
   describe "#move" do
-    context "no blocking tile and not monster blocking" do
+    context "no blocking tile and no monster blocking" do
       before do
         allow_any_instance_of(Interface).to receive(:blocked?) {false}
         allow_any_instance_of(Interface).to receive(:monster_blocks) {false}
@@ -32,13 +32,58 @@ describe Monster do
 
       it "all possible moves result in the monster in the correct movement" do
         allow(subject).to receive(:possible_moves).and_return("w")
-        expect{ monster.move }.to change{ monster.y }.by(-1)  # w
+        expect{ monster.move }.to change{ monster.y }.by(-1)
         allow(subject).to receive(:possible_moves).and_return("a")
-        expect{ monster.move }.to change{ monster.x }.by(-1) # a
+        expect{ monster.move }.to change{ monster.x }.by(-1)
         allow(subject).to receive(:possible_moves).and_return("s")
-        expect{ monster.move }.to change{ monster.y }.by(1) # s
+        expect{ monster.move }.to change{ monster.y }.by(1)
         allow(subject).to receive(:possible_moves).and_return("d")
-        expect{ monster.move }.to change{ monster.x }.by(1)  # d
+        expect{ monster.move }.to change{ monster.x }.by(1)
+        allow(subject).to receive(:possible_moves).and_return(nil)
+        expect{ monster.move }.to change{ monster.x }.by(0)
+        expect{ monster.move }.to change{ monster.y }.by(0)
+      end
+    end
+
+    context "blocking tile and no monster blocking" do
+      before do
+        allow_any_instance_of(Interface).to receive(:blocked?) {true}
+        allow_any_instance_of(Interface).to receive(:monster_blocks) {false}
+      end
+
+      it "all possible moves result in the monster in the correct movement (none)" do
+        allow(subject).to receive(:possible_moves).and_return("w")
+        expect{ monster.move }.to change{ monster.y }.by(0)
+        allow(subject).to receive(:possible_moves).and_return("a")
+        expect{ monster.move }.to change{ monster.x }.by(0)
+        allow(subject).to receive(:possible_moves).and_return("s")
+        expect{ monster.move }.to change{ monster.y }.by(0)
+        allow(subject).to receive(:possible_moves).and_return("d")
+        expect{ monster.move }.to change{ monster.x }.by(0)
+        allow(subject).to receive(:possible_moves).and_return(nil)
+        expect{ monster.move }.to change{ monster.x }.by(0)
+        expect{ monster.move }.to change{ monster.y }.by(0)
+      end
+    end
+
+    context "no blocking tile and monster blocking" do
+      before do
+        allow_any_instance_of(Interface).to receive(:blocked?) {false}
+        allow_any_instance_of(Interface).to receive(:monster_blocks) {true}
+      end
+
+      it "all possible moves result in the monster in the correct movement (none)" do
+        allow(subject).to receive(:possible_moves).and_return("w")
+        expect{ monster.move }.to change{ monster.y }.by(0)
+        allow(subject).to receive(:possible_moves).and_return("a")
+        expect{ monster.move }.to change{ monster.x }.by(0)
+        allow(subject).to receive(:possible_moves).and_return("s")
+        expect{ monster.move }.to change{ monster.y }.by(0)
+        allow(subject).to receive(:possible_moves).and_return("d")
+        expect{ monster.move }.to change{ monster.x }.by(0)
+        allow(subject).to receive(:possible_moves).and_return(nil)
+        expect{ monster.move }.to change{ monster.x }.by(0)
+        expect{ monster.move }.to change{ monster.y }.by(0)
       end
     end
 
