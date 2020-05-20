@@ -15,9 +15,6 @@ class Empty < Tile
   def initialize
     @string = "   "
   end
-
-  def player_interaction
-  end
 end
 
 class StairsUp < Tile
