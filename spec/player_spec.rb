@@ -47,7 +47,7 @@ describe Player do
     end
 
     it "return nothing, but runs for about 0.5s" do
-      allow($stdin).to receive(:getch).and_return("")
+      allow_any_instance_of(IO).to receive(:getch) { sleep(5) }
       start = Time.now
       player.user_move
       expect(Time.now - start).to be_within(0.05).of(0.5)
