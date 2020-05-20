@@ -28,7 +28,7 @@ class Player < Moveable
 
   def user_move
     start = Time.now
-    while Time.now - start < 0.5
+    while Time.now - start < 0.49
       move = read_move
       return move if move
     end
