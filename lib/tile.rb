@@ -5,7 +5,7 @@ class Tile
   def initialize
     @blocks_player = false
     @blocks_monster = false
-    @interface = Interface.new
+    @@interface ||= Interface.new
   end
   def player_interaction
   end
@@ -31,10 +31,10 @@ class StairsUp < Tile
 
   def player_interaction
     if @move_on
-      @interface.lvl_up
-      @interface.print_to_screen("found stairs leading up")
+      @@interface.lvl_up
+      @@interface.print_to_screen("found stairs leading up")
       sleep(1)
-      @interface.level_load
+      @@interface.level_load
     end
   end
 end
@@ -53,10 +53,10 @@ class StairsDown < Tile
 
   def player_interaction
     if @move_on
-      @interface.lvl_down
-      @interface.print_to_screen("found stairs leading down")
+      @@interface.lvl_down
+      @@interface.print_to_screen("found stairs leading down")
       sleep(1)
-      @interface.level_load
+      @@interface.level_load
     end
   end
 end
@@ -76,7 +76,7 @@ class Treasure < Tile
   end
 
   def player_interaction
-    @interface.print_to_screen("you are winner")
+    @@interface.print_to_screen("you are winner")
     exit
   end
 end
@@ -88,8 +88,8 @@ class Key < Tile
   end
 
   def player_interaction
-    @interface.get_key
-    @interface.remove_key_from_level
+    @@interface.get_key
+    @@interface.remove_key_from_level
   end
 end
 
@@ -101,8 +101,8 @@ class Door < Tile
   end
 
   def blocks_player
-    if @interface.player_keys > 0
-      @interface.use_key
+    if @@interface.player_keys > 0
+      @@interface.use_key
       false
     else
       true
@@ -110,7 +110,7 @@ class Door < Tile
   end
 
   def player_interaction
-    @interface.turn_into_UnLocked
+    @@interface.turn_into_UnLocked
   end
 end
 
