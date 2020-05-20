@@ -17,10 +17,11 @@ describe Player do
       expect(player.y).to eq(2)
     end
 
-    it "should have a way to interface with other
-    classes using an instance of Interface" do
-      expect(player.interface).to be_an_instance_of(Interface)
-    end
+    ## made private
+      #it "should have a way to interface with other
+      #classes using an instance of Interface" do
+      #  expect(moveable.interface).to be_an_instance_of(Interface)
+      #end
   end
 
   describe "#user_move" do

@@ -3,7 +3,6 @@ require_relative 'interface'
 class Moveable
 
   attr_accessor :x, :y
-  attr_reader :interface
 
   def initialize(x, y)
     @y = y
