@@ -14,6 +14,7 @@ end
 class Empty < Tile
   def initialize
     @string = "   "
+    super
   end
 end
 
