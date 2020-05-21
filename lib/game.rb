@@ -39,8 +39,8 @@ def time_check
   false
 end
 
-
-game = Game.new(Interface.new)
-
-game.start_game
-game.main_loop
+def play
+  game = Game.new(Interface.new)
+  game.start_game
+  game.main_loop
+end

@@ -104,7 +104,7 @@ class Interface
       @@monsters.each do |monster|
         if @@player.y == monster.y && @@player.x == monster.x
           print_to_screen("you are dead")
-          exit
+          exit(1)
         end
       end
     end

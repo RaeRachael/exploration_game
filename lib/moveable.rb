@@ -39,18 +39,18 @@ class Player < Moveable
       move = read_move
       return move if move
     end
-    @hold_input = $stdin
-    @@hold = true
+  #  @hold_input = $stdin
+    #@@hold = true
   end
 
   def read_move
     chr = Timeout::timeout(0.05) do
-      if @@hold
-        @@hold = false
-        @hold_input.to_s[0]
-      else
+      #if @@hold
+      #  @@hold = false
+      #  @hold_input.to_s[0]
+      #else
         $stdin.getch
-      end
+      #end
     end
     return chr if chr.match(/[wasdp]/)
   rescue Timeout::Error
@@ -85,7 +85,7 @@ class Monster < Moveable
   end
 
   def move
-    @@hold = true
+    #@@hold = true
     case possible_moves
     when "w"
       @y -= 1 unless tile_blocked_for?(@y - 1, @x, "monster")
