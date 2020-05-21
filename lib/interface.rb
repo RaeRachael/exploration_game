@@ -117,7 +117,7 @@ class Interface
       if code == 'down'
         lvl_down
         print_to_screen("found stairs leading down")
-      elsif code = 'up'
+      elsif code == 'up'
         lvl_up
         print_to_screen("found stairs leading up")
       end
