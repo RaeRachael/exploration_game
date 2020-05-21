@@ -1,11 +1,10 @@
 
 class LevelChange < StandardError
-  attr_reader :code, :details, :raw_json
-    def initialize(json)
-      @code     = json["code"]
-      @raw_json = json
-      super json["message"]
-    end
+  attr_reader :thing
+  def initialize(msg="My default message")
+    @thing = thing
+    super(msg)
+  end
 end
 
 

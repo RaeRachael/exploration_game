@@ -31,7 +31,7 @@ class StairsUp < Tile
 
   def player_interaction
     if @move_on
-      raise LevelChange, {"message" => 'up'}
+      raise LevelChange.new('up')
     end
   end
 end
@@ -50,7 +50,7 @@ class StairsDown < Tile
 
   def player_interaction
     if @move_on
-      raise LevelChange, {"message" => 'down'}
+      raise LevelChange.new('down')
     end
   end
 end

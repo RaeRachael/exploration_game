@@ -114,10 +114,11 @@ class Interface
     begin
       @@tile[@@player.y][@@player.x].player_interaction
     rescue LevelChange => code
-      if code == 'down'
+      puts code.inspect
+      if code.message == 'down'
         lvl_down
         print_to_screen("found stairs leading down")
-      elsif code == 'up'
+      elsif code.message == 'up'
         lvl_up
         print_to_screen("found stairs leading up")
       end

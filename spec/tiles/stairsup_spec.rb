@@ -15,7 +15,7 @@ describe StairsUp do
       it 'should load_level otherwise' do ### WEAK TEST
         subject.blocks_player
         expect{ subject.player_interaction }
-        .to raise_error(LevelChange, 'up')
+        .to raise_error(LevelChange, {"message" => 'up'})
       end
     end
   end
