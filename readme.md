@@ -9,7 +9,7 @@ exit the game with 'p'
 ### To play
 
 ```shell
-ruby ./lib/game
+ruby ./lib/play.rb
 ```
 
 ### Example screenshot of the game
