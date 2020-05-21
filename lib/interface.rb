@@ -111,7 +111,19 @@ class Interface
   end
 
   def tile_interaction #called - game; needs - interface, moveable
-    @@tile[@@player.y][@@player.x].player_interaction
+    begin
+      @@tile[@@player.y][@@player.x].player_interaction
+    rescue LevelChange => code
+      if code == 'down'
+        lvl_down
+        print_to_screen("found stairs leading down")
+      elsif code = 'up'
+        lvl_up
+        print_to_screen("found stairs leading up")
+      end
+      sleep(1)
+      level_load
+    end
   end
 
   def player_move #called - game; needs - interface, moveable

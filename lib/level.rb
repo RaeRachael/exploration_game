@@ -1,4 +1,8 @@
 
+class LevelChange < StandardError
+end
+
+
 def level_data
   [["----------",
    "- -      -",

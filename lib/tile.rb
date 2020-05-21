@@ -31,10 +31,7 @@ class StairsUp < Tile
 
   def player_interaction
     if @move_on
-      @@interface.lvl_up
-      @@interface.print_to_screen("found stairs leading up")
-      sleep(1)
-      @@interface.level_load
+      raise LevelChange, 'up'
     end
   end
 end
@@ -53,10 +50,7 @@ class StairsDown < Tile
 
   def player_interaction
     if @move_on
-      @@interface.lvl_down
-      @@interface.print_to_screen("found stairs leading down")
-      sleep(1)
-      @@interface.level_load
+      raise LevelChange, 'down'
     end
   end
 end
