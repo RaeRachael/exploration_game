@@ -77,7 +77,7 @@ class Treasure < Tile
 
   def player_interaction
     @@interface.print_to_screen("you are winner")
-    exit
+    exit(2)
   end
 end
 
