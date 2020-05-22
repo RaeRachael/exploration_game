@@ -1,13 +1,23 @@
 require_relative 'interface'
 
 class Tile
-  attr_reader :blocks_player, :blocks_monster, :string
+  attr_reader :string
+
   def initialize
     @blocks_player = false
     @blocks_monster = false
     @@interface ||= Interface.new
   end
+
   def player_interaction
+  end
+
+  def blocks_player?
+    @blocks_player
+  end
+
+  def blocks_monster?
+    @blocks_monster
   end
 end
 
@@ -24,7 +34,7 @@ class StairsUp < Tile
     @move_on = false
   end
 
-  def blocks_player
+  def blocks_player?
     @move_on = true
     return false
   end
@@ -43,7 +53,7 @@ class StairsDown < Tile
     @move_on = false
   end
 
-  def blocks_player
+  def blocks_player?
     @move_on = true
     return false
   end
@@ -94,7 +104,7 @@ class Door < Tile
     @string = " | "
   end
 
-  def blocks_player
+  def blocks_player?
     if @@interface.player_keys > 0
       @@interface.use_key
       false

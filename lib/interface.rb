@@ -14,9 +14,9 @@ class Interface
   def blocked?(y, x, who) #called - moveable; needs - tile
     case who
     when "player"
-      @@tile[y][x].blocks_player
+      @@tile[y][x].blocks_player?
     when "monster"
-      @@tile[y][x].blocks_monster || monster_blocks(y, x)
+      @@tile[y][x].blocks_monster? || monster_blocks?(y, x)
     end
   end
 
@@ -116,7 +116,7 @@ class Interface
     end
   end
 
-  def monster_blocks(y,x) #called - moveable; needs - interface
+  def monster_blocks?(y,x) #called - moveable; needs - interface
     @@monsters.each do |monster|
       return true if x == monster.x && y == monster.y
     end
