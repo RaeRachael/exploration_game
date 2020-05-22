@@ -12,11 +12,39 @@ exit the game with 'p'
 ruby ./lib/play.rb
 ```
 
+or
+
+```shell
+irb -r ./lib/game.rb
+\> game = Game.new(Interface.new)
+\> game.setup
+\> game.main_loop
+```
+
+
 ### Example screenshot of the game
 
 ![alt text](https://github.com/RaeRachael/exploration_game/blob/master/sample_screenshot.png)
 
 ## Comments about code plan, Struggles and Aims
+
+### Friday 22nd May
+
+#### Coding aims completed
+Managed to get RSpec tests for Tile types and Moveable types working, aren't using doubles at the moment (this could be down via dependancy injection in the future).
+Also started to create feature tests for certain interactions, like the output of the game when the player and a monster share the same space. As this a test on the exit of the game, I had to set appropriate exit codes for each different exit out the game. (0 - user_move=p, 1 - monster-player, 2 - treasure-monster). In addition I had to create specific scenarios for each test, so had to make a way to start the game after laying out the scenario in the test, this lead to the creation of the play.rb file which makes playing the game from the command line possible.
+
+#### Struggles
+Because some of the tests cared about the message associated with certain exception states (SystemExit). I had the idea that it might be useful to create a custom exception class to handle the situation of the player moving up or down levels. This required quite a bit of working out how to give a custom exception class a message and to access it, and being able to handle that in both RSpec syntax and it rescue of the exception in the main code took quite awhile.
+
+#### Aims for the next step
+
+ * I think that at some point there be a menu for the user with save, load options as well at to play. (In the Game Class)
+ * I think trying to implement different monster types, and possibly a way to fight back would be interesting.
+ * Also printing out only the local environment of the level would lead to greater possibilities of the level design in terms of size.
+ * Having a menu for the user when the game is started or paused (using the 'p' input that currently exits the game)
+ * Create more feature test scenarios
+
 
 ### Friday 15th May
 
