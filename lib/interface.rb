@@ -20,13 +20,6 @@ class Interface
     end
   end
 
-  def monster_blocks(y,x) #called - moveable; needs - interface
-    @@monsters.each do |monster|
-      return true if x == monster.x && y == monster.y
-    end
-    return false
-  end
-
   def player_keys #called - tile; needs - moveable
     @@player.key
   end
@@ -121,6 +114,13 @@ class Interface
         end
       end
     end
+  end
+
+  def monster_blocks(y,x) #called - moveable; needs - interface
+    @@monsters.each do |monster|
+      return true if x == monster.x && y == monster.y
+    end
+    return false
   end
 
   def lvl_down #called - tile; needs - interface

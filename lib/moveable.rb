@@ -12,11 +12,7 @@ class Moveable
   end
 
   def tile_blocked_for?(y, x, moveable)
-  #  if moveable == "monster"
-  #    @@interface.blocked?(y, x, moveable) || @@interface.monster_blocks(y, x)
-  #  elsif moveable == "player"
-      @@interface.blocked?(y, x, moveable)
-  #  end
+    @@interface.blocked?(y, x, moveable)
   end
 
 end
