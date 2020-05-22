@@ -9,13 +9,13 @@ describe DoorUnLocked do
 
   describe '#blocks_monster' do
     it 'should be true' do
-      expect(subject.blocks_monster).to eq(true)
+      expect(subject.blocks_monster?).to eq(true)
     end
   end
 
   describe '#blocks_player' do
     it 'should be false' do
-      expect(subject.blocks_player).to eq(false)
+      expect(subject.blocks_player?).to eq(false)
     end
   end
 end

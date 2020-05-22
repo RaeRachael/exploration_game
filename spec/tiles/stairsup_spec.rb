@@ -13,11 +13,11 @@ describe StairsUp do
         expect(subject.player_interaction).to eq(nil)
       end
       it 'should load_level otherwise' do ### WEAK TEST
-        subject.blocks_player
+        subject.blocks_player?
         expect{ subject.player_interaction }
         .to raise_error(LevelChange)
         begin
-          subject.blocks_player
+          subject.blocks_player?
           subject.player_interaction
         rescue LevelChange => code
           expect(code.message).to eq('up')

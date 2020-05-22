@@ -9,7 +9,7 @@ describe 'treasure-player interaction' do
       #allow_any_instance_of(Object).to receive(:exit) {}
       $stdin = input
       game = Game.new(test1)
-      game.start_game
+      game.setup
       expect { game.main_loop }.to raise_exception(SystemExit)
       $stdin = STDIN
     end
@@ -18,7 +18,7 @@ describe 'treasure-player interaction' do
       allow(test1).to receive(:level_data) { [["  ","t "]] }
       $stdin = input
       game = Game.new(test1)
-      game.start_game
+      game.setup
       begin
         game.main_loop
       rescue SystemExit=>exit_code

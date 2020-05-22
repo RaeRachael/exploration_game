@@ -9,7 +9,7 @@ describe 'monster-player interaction' do
       #allow_any_instance_of(Object).to receive(:exit) {}
       $stdin = input
       game = Game.new(test)
-      game.start_game
+      game.setup
       expect { game.main_loop }.to raise_exception(SystemExit)
       $stdin = STDIN
     end
@@ -18,7 +18,7 @@ describe 'monster-player interaction' do
       allow(test).to receive(:level_data) { [["  ","X "]] }
       $stdin = input
       game = Game.new(test)
-      game.start_game
+      game.setup
       begin
         game.main_loop
       rescue SystemExit=>exit_code
