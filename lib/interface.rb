@@ -5,34 +5,10 @@ require_relative 'tile'
 
 class Interface
 
-  def create_player #called - game; needs - moveable
-    @@player = Player.new(1,1)
-  end
-
-  def set_lvl_num #called - game; holds level knowledge
-    @@lvl_num = 0
-  end
-
-  def level_load #called - game & tile; needs - tile & interface
-    @@levels ||= level_data
-    @@tile = @@levels[@@lvl_num].map do |line, y|
-      line.split("").map do |char, x|
-        char = into_tile(char)
-      end
-    end
-    add_monsters_in
-  end
-
-  def add_monsters_in #called - interface; needs - moveable
-    @@monsters = []
-    @@levels[@@lvl_num].each_with_index do |line, y|
-      line.split("").each_with_index do |char, x|
-        if char == "X"
-          basic = Monster.new(x,y)
-          @@monsters << basic
-        end
-      end
-    end
+  def setup
+    create_player
+    set_lvl_num
+    level_load
   end
 
   def blocked?(y, x, who) #called - moveable; needs - tile
@@ -78,19 +54,6 @@ class Interface
     print_level(string)
   end
 
-  def add_moveables_to_print #called - interface; needs - moveable, interface
-    @@to_print = @@tile.map {|line| line.map {|tile| tile.string }}
-    @@to_print[@@player.y][@@player.x] = " o "
-    if @@monsters
-      @@monsters.each { |monster| @@to_print[monster.y][monster.x] = " X " }
-    end
-  end
-
-  def print_level(string) #called - interface; needs - interface
-    @@to_print.each { |slice| puts slice.join("").center(16) }
-    puts string
-  end
-
   def same_space_as_a_monster #called - game; needs - interface, moveable
     if @@monsters
       @@monsters.each do |monster|
@@ -130,6 +93,36 @@ class Interface
 
   private
 
+  def create_player #called - game; needs - moveable
+    @@player = Player.new(1,1)
+  end
+
+  def set_lvl_num #called - game; holds level knowledge
+    @@lvl_num = 0
+  end
+
+  def level_load #called - game & tile; needs - tile & interface
+    @@levels ||= level_data
+    @@tile = @@levels[@@lvl_num].map do |line, y|
+      line.split("").map do |char, x|
+        char = into_tile(char)
+      end
+    end
+    add_monsters_in
+  end
+
+  def add_monsters_in #called - interface; needs - moveable
+    @@monsters = []
+    @@levels[@@lvl_num].each_with_index do |line, y|
+      line.split("").each_with_index do |char, x|
+        if char == "X"
+          basic = Monster.new(x,y)
+          @@monsters << basic
+        end
+      end
+    end
+  end
+
   def lvl_down #called - tile; needs - interface
     @@lvl_num -= 1
   end
@@ -137,4 +130,18 @@ class Interface
   def lvl_up #called - tile; needs - interface
     @@lvl_num += 1
   end
+
+  def add_moveables_to_print #called - interface; needs - moveable, interface
+    @@to_print = @@tile.map {|line| line.map {|tile| tile.string }}
+    @@to_print[@@player.y][@@player.x] = " o "
+    if @@monsters
+      @@monsters.each { |monster| @@to_print[monster.y][monster.x] = " X " }
+    end
+  end
+
+  def print_level(string) #called - interface; needs - interface
+    @@to_print.each { |slice| puts slice.join("").center(16) }
+    puts string
+  end
+  
 end

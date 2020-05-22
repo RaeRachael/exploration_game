@@ -1,5 +1,5 @@
 require_relative 'game.rb'
 
 game = Game.new(Interface.new)
-game.start_game
+game.setup
 game.main_loop

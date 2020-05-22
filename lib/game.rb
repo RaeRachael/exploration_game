@@ -5,10 +5,8 @@ class Game
     @interface = interface
   end
 
-  def start_game
-    @interface.create_player
-    @interface.set_lvl_num
-    @interface.level_load
+  def setup
+    @interface.setup
   end
 
   def main_loop
