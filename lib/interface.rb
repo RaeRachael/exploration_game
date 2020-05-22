@@ -16,7 +16,7 @@ class Interface
     when "player"
       @@tile[y][x].blocks_player
     when "monster"
-      @@tile[y][x].blocks_monster
+      @@tile[y][x].blocks_monster || monster_blocks(y, x)
     end
   end
 
@@ -143,5 +143,5 @@ class Interface
     @@to_print.each { |slice| puts slice.join("").center(16) }
     puts string
   end
-  
+
 end
