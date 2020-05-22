@@ -51,14 +51,6 @@ class Interface
     return false
   end
 
-  def lvl_down #called - tile; needs - interface
-    @@lvl_num -= 1
-  end
-
-  def lvl_up #called - tile; needs - interface
-    @@lvl_num += 1
-  end
-
   def player_keys #called - tile; needs - moveable
     @@player.key
   end
@@ -114,7 +106,6 @@ class Interface
     begin
       @@tile[@@player.y][@@player.x].player_interaction
     rescue LevelChange => code
-      puts code.inspect
       if code.message == 'down'
         lvl_down
         print_to_screen("found stairs leading down")
@@ -135,5 +126,15 @@ class Interface
     if @@monsters
       @@monsters.each { |monster| monster.move }
     end
+  end
+
+  private
+
+  def lvl_down #called - tile; needs - interface
+    @@lvl_num -= 1
+  end
+
+  def lvl_up #called - tile; needs - interface
+    @@lvl_num += 1
   end
 end
