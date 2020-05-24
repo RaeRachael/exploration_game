@@ -2,12 +2,12 @@ require_relative '../../lib/game'
 
 describe 'treasure-player interaction' do
   context 'empty + treasue as level,' do
-    let(:input) { StringIO.new("a") }
+    let(:input3) { StringIO.new("a") }
     it 'it will exit' do
       test1 = Interface.new
       allow(test1).to receive(:level_data) { [["  ","t "]] }
       #allow_any_instance_of(Object).to receive(:exit) {}
-      $stdin = input
+      $stdin = input3
       game = Game.new(test1)
       game.setup
       expect { game.main_loop }.to raise_exception(SystemExit)
@@ -16,7 +16,7 @@ describe 'treasure-player interaction' do
     it "the exit value should 2; code for treasue - player" do
       test1 = Interface.new
       allow(test1).to receive(:level_data) { [["  ","t "]] }
-      $stdin = input
+      $stdin = input3
       game = Game.new(test1)
       game.setup
       begin
