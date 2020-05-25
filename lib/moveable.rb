@@ -4,15 +4,15 @@ class Moveable
 
   attr_accessor :x, :y
 
-  def initialize(x, y)
+  def initialize(x, y, interface)
     @y = y
     @x = x
-    @@interface ||= Interface.new
-    @@hold = false
+    @interface = interface
+    # @@hold = false
   end
 
   def tile_blocked_for?(y, x, moveable)
-    @@interface.blocked?(y, x, moveable)
+    @interface.blocked?(y, x, moveable)
   end
 
 end
@@ -21,8 +21,8 @@ class Player < Moveable
 
   attr_accessor :key
 
-  def initialize (x, y)
-    super(x,y)
+  def initialize(x, y, interface)
+    super(x, y, interface)
     @key = 0
   end
 
@@ -71,8 +71,8 @@ end
 
 class Monster < Moveable
 
-  def initialize (x, y)
-    super(x,y)
+  def initialize(x, y, interface)
+    super(x, y, interface)
     @possible_moves = ["w","a","s","d",nil,nil]
   end
 

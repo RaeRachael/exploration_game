@@ -1,6 +1,8 @@
 require_relative '../../lib/tile.rb'
 
 describe StairsDown do
+  let(:interface_double) {double(:interface)}
+  let(:subject) {StairsDown.new(interface_double)}
   describe '#string' do
     it 'should have " D " representation' do
       expect(subject.string).to eq(" D ")

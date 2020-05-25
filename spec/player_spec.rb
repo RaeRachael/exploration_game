@@ -1,12 +1,13 @@
 require_relative '../lib/moveable.rb'
 
 describe Player do
-  subject(:player) { described_class.new(1,1) }
+  let(:interface_double) {double(:interface)}
+  subject(:player) { described_class.new(1, 1, interface_double) }
 
   describe "should inherit properties from Moveable" do
 
     it "should require two arguments that define its location" do
-      expect(Player).to respond_to(:new).with(2).arguments
+      expect(Player).to respond_to(:new).with(3).arguments
     end
 
     it "should have location parameters accessable" do
@@ -38,7 +39,7 @@ describe Player do
   describe "#move" do
     context "no blocking tile" do
       before do
-        allow_any_instance_of(Interface).to receive(:blocked?) {false}
+        allow(interface_double).to receive(:blocked?) {false}
       end
 
       let(:input2) { StringIO.new("fsqawdp") }
@@ -56,7 +57,7 @@ describe Player do
 
     context "blocking tile" do
       before do
-        allow_any_instance_of(Interface).to receive(:blocked?) {true}
+        allow(interface_double).to receive(:blocked?) {true}
       end
 
       let(:input2) { StringIO.new("fsqawdp") }

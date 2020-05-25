@@ -1,6 +1,8 @@
 require_relative '../../lib/tile.rb'
 
 describe Key do
+  let(:interface_double) {double(:interface)}
+  let(:subject) {Key.new(interface_double)}
   describe '#string' do
     it 'should have " k " representation' do
       expect(subject.string).to eq(" k ")
@@ -8,8 +10,8 @@ describe Key do
   end
 
   before do ### ideas for how to double this?
-    allow_any_instance_of(Interface).to receive(:get_key) {}
-    allow_any_instance_of(Interface).to receive(:remove_key_from_level) {true}
+    allow(interface_double).to receive(:get_key) {}
+    allow(interface_double).to receive(:remove_key_from_level) {true}
   end
 
   describe '#player_interaction' do

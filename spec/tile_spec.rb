@@ -1,6 +1,8 @@
 require_relative '../lib/tile.rb'
 
 describe Tile do
+  let(:interface_double) {double(:interface)}
+  let(:subject) {Tile.new(interface_double)}
   describe '#initialize' do
     it 'should blocks_player, blocks_monster and
     string as attr_reader' do

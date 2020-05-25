@@ -53,25 +53,25 @@ def level_data
    "-----------"]]
 end
 
-def into_tile(str)
+def into_tile(str, interface)
   case str
   when "-"
-    return Wall.new
+    return Wall.new(interface)
   when "S"
-    return StairsUp.new
+    return StairsUp.new(interface)
   when "D"
-    return StairsDown.new
+    return StairsDown.new(interface)
   when "t"
-    return Treasure.new
+    return Treasure.new(interface)
   when "k"
-    return Key.new
+    return Key.new(interface)
   when "|"
-    return Door.new
+    return Door.new(interface)
   when " "
-    return Empty.new
+    return Empty.new(interface)
   when "\\"
-    return DoorUnLocked.new
+    return DoorUnLocked.new(interface)
   else
-    return Empty.new
+    return Empty.new(interface)
   end
 end

@@ -1,6 +1,8 @@
 require_relative '../../lib/tile.rb'
 
 describe Door do
+  let(:interface_double) {double(:interface)}
+  let(:subject) {Door.new(interface_double)}
   describe '#string' do
     it 'should have " | " representation' do
       expect(subject.string).to eq(" | ")
@@ -15,7 +17,7 @@ describe Door do
 
   context 'player has no keys' do
     before do ### ideas for how to double this?
-      allow_any_instance_of(Interface).to receive(:player_keys) {0}
+      allow(interface_double).to receive(:player_keys) {0}
     end
 
     describe '#blocks_player' do
@@ -27,8 +29,8 @@ describe Door do
 
   context 'player has keys' do
     before do ### ideas for how to double this?
-      allow_any_instance_of(Interface).to receive(:player_keys) {1}
-      allow_any_instance_of(Interface).to receive(:use_key) {}
+      allow(interface_double).to receive(:player_keys) {1}
+      allow(interface_double).to receive(:use_key) {}
     end
 
     describe '#blocks_player' do
@@ -40,7 +42,7 @@ describe Door do
 
   describe '#player_interaction' do
     it 'should turn into an unlocked door' do
-      allow_any_instance_of(Interface).to receive(:turn_into_UnLocked) {true}
+      allow(interface_double).to receive(:turn_into_UnLocked) {true}
       expect(subject.player_interaction).to eq(true)
     end
   end

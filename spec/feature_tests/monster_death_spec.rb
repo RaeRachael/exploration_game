@@ -6,7 +6,6 @@ describe 'monster-player interaction' do
     it 'it will exit' do
       test = Interface.new
       allow(test).to receive(:level_data) { [["  ","X "]] }
-      #allow_any_instance_of(Object).to receive(:exit) {}
       $stdin = input
       game = Game.new(test)
       game.setup

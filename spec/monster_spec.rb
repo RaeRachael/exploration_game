@@ -1,12 +1,13 @@
 require_relative '../lib/moveable.rb'
 
 describe Monster do
-  subject(:monster) { described_class.new(1,1) }
+  let(:interface_double) {double(:interface)}
+  subject(:monster) { described_class.new(1, 1, interface_double) }
 
   describe "should inherit properties from Moveable" do
 
     it "should require two arguments that define its location" do
-      expect(Monster).to respond_to(:new).with(2).arguments
+      expect(Monster).to respond_to(:new).with(3).arguments
     end
 
     it "should have location parameters accessable" do
@@ -27,7 +28,7 @@ describe Monster do
   describe "#move" do
     context "move not blocked" do
       before do
-        allow_any_instance_of(Interface).to receive(:blocked?) {false}
+        allow(interface_double).to receive(:blocked?) {false}
       end
 
       it "all possible moves result in the monster in the correct movement" do
@@ -47,7 +48,7 @@ describe Monster do
 
     context "move blocked" do
       before do
-        allow_any_instance_of(Interface).to receive(:blocked?) {true}
+        allow(interface_double).to receive(:blocked?) {true}
       end
 
       it "all possible moves result in the monster in the correct movement (none)" do

@@ -1,6 +1,8 @@
 require_relative '../../lib/tile.rb'
 
 describe Treasure do
+  let(:interface_double) {double(:interface)}
+  let(:subject) {Treasure.new(interface_double)}
   describe '#string' do
     it 'should have " t " representation' do
       expect(subject.string).to eq(" t ")
@@ -8,7 +10,7 @@ describe Treasure do
   end
 
   before do ### ideas for how to double this?
-    allow_any_instance_of(Interface).to receive(:print_to_screen) {}
+    allow(interface_double).to receive(:print_to_screen) {}
   end
 
   describe '#player_interaction' do
