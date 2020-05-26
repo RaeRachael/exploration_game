@@ -33,12 +33,12 @@ class Interface
   end
 
   def remove_key_from_level #called - tile; needs - interface
-    @tile[@player.y][@player.x] = Empty.new
+    @tile[@player.y][@player.x] = Empty.new(self)
     @levels[@lvl_num][@player.y][@player.x] = " "
   end
 
   def turn_into_UnLocked #called - tile; needs - interface
-    @tile[@player.y][@player.x] = DoorUnLocked.new
+    @tile[@player.y][@player.x] = DoorUnLocked.new(self)
     @levels[@lvl_num][@player.y][@player.x] = "\\"
   end
 
