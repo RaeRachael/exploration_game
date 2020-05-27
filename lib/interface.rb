@@ -43,6 +43,7 @@ class Interface
   end
 
   def print_to_screen(string = "") #called - game, interface, tile; needs -
+    ## selection [0..2*sight]grid
     add_moveables_to_print
     print_level(string)
   end
@@ -140,7 +141,7 @@ class Interface
   end
 
   def print_level(string) #called - interface; needs - interface
-    @to_print.each { |slice| puts slice.join("").center(16) }
+    @to_print.each { |slice| puts slice.join("").center(30) }
     puts string
   end
 
