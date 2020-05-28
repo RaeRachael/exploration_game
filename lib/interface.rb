@@ -43,7 +43,7 @@ class Interface
   end
 
   def print_to_screen(string = "") #called - game, interface, tile; needs -
-    ## selection [0..2*sight]grid
+    selection  ## [0..2*sight]grid
     add_moveables_to_print
     print_level(string)
   end
@@ -132,6 +132,15 @@ class Interface
     @lvl_num += 1
   end
 
+  def selection
+    @sight = 1
+    @printxy = []
+    @to_printy = @tile[(@player.y - @sight)..(@player.y + @sight)]
+    @to_printy.map do |line|
+      @printxy << line[(@player.x - @sight)..(@player.x + @sight)].map{|a| a.string}
+    end
+  end
+
   def add_moveables_to_print #called - interface; needs - moveable, interface
     @to_print = @tile.map {|line| line.map {|tile| tile.string }}
     @to_print[@player.y][@player.x] = " o "
@@ -141,7 +150,8 @@ class Interface
   end
 
   def print_level(string) #called - interface; needs - interface
-    @to_print.each { |slice| puts slice.join("").center(30) }
+    #puts @printxy.inspect
+    @printxy.each { |slice| puts slice.join("") }
     puts string
   end
 
