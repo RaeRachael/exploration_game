@@ -88,7 +88,7 @@ class Interface
   private
 
   def create_player #called - game; needs - moveable
-    @player = Player.new(1, 1, self)
+    @player = Player.new(2, 2, self)
   end
 
   def set_lvl_num #called - game; holds level knowledge
@@ -102,6 +102,12 @@ class Interface
         char = into_tile(char, self)
       end
     end
+    @tile.unshift([Empty.new(self)] * @tile[0].length)
+    @tile.push([Empty.new(self)] * @tile[0].length)
+    @tile.map do |line|
+      line.unshift(Empty.new(self))
+      line.push(Empty.new(self))
+    end
     add_monsters_in
   end
 
@@ -110,7 +116,7 @@ class Interface
     @levels[@lvl_num].each_with_index do |line, y|
       line.split("").each_with_index do |char, x|
         if char == "X"
-          basic = Monster.new(x, y, self)
+          basic = Monster.new(x+1, y+1, self)
           @monsters << basic
         end
       end
@@ -133,7 +139,7 @@ class Interface
   end
 
   def selection
-    @sight = 1
+    @sight = 2
     @printxy = []
     @to_printy = @tile[(@player.y - @sight)..(@player.y + @sight)]
     @to_printy.map do |line|
@@ -142,10 +148,20 @@ class Interface
   end
 
   def add_moveables_to_print #called - interface; needs - moveable, interface
-    @to_print = @tile.map {|line| line.map {|tile| tile.string }}
-    @to_print[@player.y][@player.x] = " o "
+    #@to_print = @tile.map {|line| line.map {|tile| tile.string }}
+    #@to_print[@player.y][@player.x] = " o "
+    #if @monsters
+    #  @monsters.each { |monster| @to_print[monster.y][monster.x] = " X " }
+    #end
+    @printxy[@sight][@sight] = " o "
     if @monsters
-      @monsters.each { |monster| @to_print[monster.y][monster.x] = " X " }
+      @monsters.each do |monster|
+        if (monster.y - @player.y).abs <= @sight && (monster.x - @player.x).abs <= @sight
+          y = @sight + (monster.y - @player.y)
+          x = @sight + (monster.x - @player.x)
+          @printxy[y][x] = " X "
+        end
+      end
     end
   end
 
