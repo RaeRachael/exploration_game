@@ -5,7 +5,7 @@ describe 'treasure-player interaction' do
     let(:input) { StringIO.new("a") }
     it "the exit value should 2; code for treasue - player" do
       test = Interface.new
-      allow(test).to receive(:level_data) { [["  ","t "]] }
+      allow(test).to receive(:level_data_1) { [["  ","t "]] }
       $stdin = input
       game = Game.new(test)
       game.setup

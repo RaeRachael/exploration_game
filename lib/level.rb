@@ -7,8 +7,30 @@ class LevelChange < StandardError
   end
 end
 
+def into_tile(str, interface)
+  case str
+  when "-"
+    return Wall.new(interface)
+  when "S"
+    return StairsUp.new(interface)
+  when "D"
+    return StairsDown.new(interface)
+  when "t"
+    return Treasure.new(interface)
+  when "k"
+    return Key.new(interface)
+  when "|"
+    return Door.new(interface)
+  when " "
+    return Empty.new(interface)
+  when "\\"
+    return DoorUnLocked.new(interface)
+  else
+    return Empty.new(interface)
+  end
+end
 
-def level_data
+def level_data_1
   [["-----------",
    "- -       -",
    "- - ----- -",
@@ -55,27 +77,4 @@ def level_data
    "- --------",
    "-       D-",
    "----------"]]
-end
-
-def into_tile(str, interface)
-  case str
-  when "-"
-    return Wall.new(interface)
-  when "S"
-    return StairsUp.new(interface)
-  when "D"
-    return StairsDown.new(interface)
-  when "t"
-    return Treasure.new(interface)
-  when "k"
-    return Key.new(interface)
-  when "|"
-    return Door.new(interface)
-  when " "
-    return Empty.new(interface)
-  when "\\"
-    return DoorUnLocked.new(interface)
-  else
-    return Empty.new(interface)
-  end
 end

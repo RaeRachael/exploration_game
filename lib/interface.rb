@@ -8,6 +8,7 @@ class Interface
   def setup
     create_player
     set_lvl_num
+    load_level_data
     level_load
   end
 
@@ -34,12 +35,12 @@ class Interface
 
   def remove_key_from_level #called - tile; needs - interface
     @tile[@player.y][@player.x] = Empty.new(self)
-    @levels[@lvl_num][@player.y][@player.x] = " "
+    @levels[@lvl_num][@player.y - 2][@player.x - 2] = " "
   end
 
   def turn_into_UnLocked #called - tile; needs - interface
     @tile[@player.y][@player.x] = DoorUnLocked.new(self)
-    @levels[@lvl_num][@player.y][@player.x] = "\\"
+    @levels[@lvl_num][@player.y - 2][@player.x - 2] = "\\"
   end
 
   def print_to_screen(string = "") #called - game, interface, tile; needs -
@@ -88,25 +89,30 @@ class Interface
   private
 
   def create_player #called - game; needs - moveable
-    @player = Player.new(2, 2, self)
+    @player = Player.new(3, 3, self)
   end
 
   def set_lvl_num #called - game; holds level knowledge
     @lvl_num = 0
   end
 
+  def load_level_data
+    @levels = level_data_1
+  end
+
   def level_load #called - game & tile; needs - tile & interface
-    @levels ||= level_data
     @tile = @levels[@lvl_num].map do |line, y|
       line.split("").map do |char, x|
         char = into_tile(char, self)
       end
     end
-    @tile.unshift([Empty.new(self)] * @tile[0].length)
-    @tile.push([Empty.new(self)] * @tile[0].length)
+    2.times { @tile.unshift([Empty.new(self)] * @tile[0].length) }
+    2.times { @tile.push([Empty.new(self)] * @tile[0].length) }
     @tile.map do |line|
-      line.unshift(Empty.new(self))
-      line.push(Empty.new(self))
+      2.times do
+        line.unshift(Empty.new(self))
+        line.push(Empty.new(self))
+      end
     end
     add_monsters_in
   end
@@ -116,7 +122,7 @@ class Interface
     @levels[@lvl_num].each_with_index do |line, y|
       line.split("").each_with_index do |char, x|
         if char == "X"
-          basic = Monster.new(x+1, y+1, self)
+          basic = Monster.new(x+2, y+2, self)
           @monsters << basic
         end
       end
@@ -148,11 +154,6 @@ class Interface
   end
 
   def add_moveables_to_print #called - interface; needs - moveable, interface
-    #@to_print = @tile.map {|line| line.map {|tile| tile.string }}
-    #@to_print[@player.y][@player.x] = " o "
-    #if @monsters
-    #  @monsters.each { |monster| @to_print[monster.y][monster.x] = " X " }
-    #end
     @printxy[@sight][@sight] = " o "
     if @monsters
       @monsters.each do |monster|
@@ -166,9 +167,8 @@ class Interface
   end
 
   def print_level(string) #called - interface; needs - interface
-    #puts @printxy.inspect
     @printxy.each { |slice| puts slice.join("") }
-    puts string
+  #  puts string
   end
 
 end

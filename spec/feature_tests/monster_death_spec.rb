@@ -5,7 +5,7 @@ describe 'monster-player interaction' do
     let(:input) { StringIO.new("a") }
     it "the exit value should 1; code for monster - player" do
       test = Interface.new
-      allow(test).to receive(:level_data) { [["  ","X "]] }
+      allow(test).to receive(:level_data_1) { [["  ","X "]] }
       $stdin = input
       game = Game.new(test)
       game.setup
