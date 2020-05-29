@@ -8,7 +8,6 @@ class Moveable
     @y = y
     @x = x
     @interface = interface
-    # @@hold = false
   end
 
   def tile_blocked_for?(y, x, moveable)
