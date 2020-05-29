@@ -168,7 +168,7 @@ class Interface
 
   def print_level(string) #called - interface; needs - interface
     @printxy.each { |slice| puts slice.join("") }
-  #  puts string
+    puts string
   end
 
 end
