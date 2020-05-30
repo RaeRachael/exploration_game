@@ -25,8 +25,32 @@ irb -r ./lib/game.rb
 ### Example Screenshot of the Game
 
 ![alt text](https://github.com/RaeRachael/exploration_game/blob/master/sample_screenshot.png)
+! this needs to be updated !
 
 ## Comments About the Code Plan, Struggles and Aims
+
+### Staurday 30th May
+
+#### Coding Aims Completed
+* Feature test scenarios
+* Printing out only the local environment of the level
+
+#### How the Game Looked Before
+![alt text](https://github.com/RaeRachael/exploration_game/blob/master/sample_screenshot.png)
+
+##### Feature Test Scenarios, Replacing Class Variables with Instance Variables
+Creating the individual feature test was fine, get them to pass when run together caused a slight problem, as the game code used class varibales in the Interface Class. So the level scenario data from the first feature test was being used in all of them. Luckily changing the code so that only one Interface instance is used by all other objects (acheived via dependacy injection) meant that I could replace all class variables with instance variables. The dependacy injection also allowed me to tidy up the unit spec tests for the tile and moveable class objects. Also by only having one instance of the Interface class the code should take up less space when being run (which is good for being able to have larger levels in the future)
+
+##### Printing Out the Local Environment
+Finally for the first time in this project, since the #user_move method was created, there has been TDD being used. Thinking of the best way to go about testing this took quite a bit of time, but I eventually thought that testing the standard output against a regex would be the best way. This was mostly because I knew that the '.' symbol is treated as any character and that you can specify how many you would like in a row, (to get the correct syntax required a quick google) but making the test didn't take much time after the idea for it arrived. <br/>
+Passing the test was interesting as the case when the player was by the edge of the specified level map lead to the program looking to interact with indexes outside of the Array range, to deal with this I added a buffer of empty tiles around the level maps when the level data is being made into a 3D array of Tiles. Also there is now a @sight instance variable for the player that determines how far the player can see.
+
+#### Aims for the Next Steps
+ * I think that at some point there be a menu for the user with save, load options as well at to play. (In the Game Class)
+ * I think trying to implement different monster types, and possibly a way to fight back would be interesting.
+ * Utilising the @sight instance variable such that the distance a player can see is variable - possible difficulty setting?, possible torch tiles that temporarily increase the line of sight?
+ * Having a menu for the user when the game is started or paused (using the 'p' input that currently exits the game)
+
 
 ### Friday 22nd May
 
