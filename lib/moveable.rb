@@ -19,10 +19,12 @@ end
 class Player < Moveable
 
   attr_accessor :key
+  attr_reader :sight
 
   def initialize(x, y, interface)
     super(x, y, interface)
     @key = 0
+    @sight = 2
   end
 
   require 'io/console'
@@ -34,18 +36,11 @@ class Player < Moveable
       move = read_move
       return move if move
     end
-  #  @hold_input = $stdin
-    #@@hold = true
   end
 
   def read_move
     chr = Timeout::timeout(0.05) do
-      #if @@hold
-      #  @@hold = false
-      #  @hold_input.to_s[0]
-      #else
-        $stdin.getch
-      #end
+      $stdin.getch
     end
     return chr if chr.match(/[wasdp]/)
   rescue Timeout::Error
@@ -72,7 +67,7 @@ class Monster < Moveable
 
   def initialize(x, y, interface)
     super(x, y, interface)
-    @possible_moves = ["w","a","s","d",nil,nil]
+    @possible_moves = ["w", "a", "s", "d", nil, nil]
   end
 
   def possible_moves
@@ -80,7 +75,6 @@ class Monster < Moveable
   end
 
   def move
-    #@@hold = true
     case possible_moves
     when "w"
       @y -= 1 unless tile_blocked_for?(@y - 1, @x, "monster")

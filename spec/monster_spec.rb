@@ -1,7 +1,7 @@
 require_relative '../lib/moveable.rb'
 
 describe Monster do
-  let(:interface_double) {double(:interface)}
+  let(:interface_double) { double(:interface) }
   subject(:monster) { described_class.new(1, 1, interface_double) }
 
   describe "should inherit properties from Moveable" do
@@ -13,22 +13,17 @@ describe Monster do
     it "should have location parameters accessable" do
       expect(monster.x).to eq(1)
       expect(monster.y).to eq(1)
-      monster.x, monster.y = 2,2
+      monster.x, monster.y = 2, 2
       expect(monster.x).to eq(2)
       expect(monster.y).to eq(2)
     end
 
-    ## made private
-      #it "should have a way to interface with other
-      #classes using an instance of Interface" do
-      #  expect(moveable.interface).to be_an_instance_of(Interface)
-      #end
   end
 
   describe "#move" do
     context "move not blocked" do
       before do
-        allow(interface_double).to receive(:blocked?) {false}
+        allow(interface_double).to receive(:blocked?) { false }
       end
 
       it "all possible moves result in the monster in the correct movement" do
@@ -48,7 +43,7 @@ describe Monster do
 
     context "move blocked" do
       before do
-        allow(interface_double).to receive(:blocked?) {true}
+        allow(interface_double).to receive(:blocked?) { true }
       end
 
       it "all possible moves result in the monster in the correct movement (none)" do

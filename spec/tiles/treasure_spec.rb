@@ -1,8 +1,8 @@
 require_relative '../../lib/tile.rb'
 
 describe Treasure do
-  let(:interface_double) {double(:interface)}
-  let(:subject) {Treasure.new(interface_double)}
+  let(:interface_double) { double(:interface) }
+  let(:subject) { Treasure.new(interface_double) }
   describe '#string' do
     it 'should have " t " representation' do
       expect(subject.string).to eq(" t ")

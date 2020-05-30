@@ -1,7 +1,7 @@
 require_relative '../lib/moveable.rb'
 
 describe Player do
-  let(:interface_double) {double(:interface)}
+  let(:interface_double) { double(:interface) }
   subject(:player) { described_class.new(1, 1, interface_double) }
 
   describe "should inherit properties from Moveable" do
@@ -13,16 +13,11 @@ describe Player do
     it "should have location parameters accessable" do
       expect(player.x).to eq(1)
       expect(player.y).to eq(1)
-      player.x, player.y = 2,2
+      player.x, player.y = 2, 2
       expect(player.x).to eq(2)
       expect(player.y).to eq(2)
     end
 
-    ## made private
-      #it "should have a way to interface with other
-      #classes using an instance of Interface" do
-      #  expect(moveable.interface).to be_an_instance_of(Interface)
-      #end
   end
 
   describe "#user_move" do
@@ -32,14 +27,14 @@ describe Player do
 
     it "getch method doesn't wait for 0.5s" do
       allow_any_instance_of(IO).to receive(:getch) { sleep(5) }
-      expect { Timeout::timeout(0.5) {player.read_move } }.to_not raise_error
+      expect { Timeout::timeout(0.5) { player.read_move } }.to_not raise_error
     end
   end
 
   describe "#move" do
     context "no blocking tile" do
       before do
-        allow(interface_double).to receive(:blocked?) {false}
+        allow(interface_double).to receive(:blocked?) { false }
       end
 
       let(:input2) { StringIO.new("fsqawdp") }
@@ -57,7 +52,7 @@ describe Player do
 
     context "blocking tile" do
       before do
-        allow(interface_double).to receive(:blocked?) {true}
+        allow(interface_double).to receive(:blocked?) { true }
       end
 
       let(:input2) { StringIO.new("fsqawdp") }

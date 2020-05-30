@@ -1,8 +1,8 @@
 require_relative '../../lib/tile.rb'
 
 describe StairsDown do
-  let(:interface_double) {double(:interface)}
-  let(:subject) {StairsDown.new(interface_double)}
+  let(:interface_double) { double(:interface) }
+  let(:subject) { StairsDown.new(interface_double) }
   describe '#string' do
     it 'should have " D " representation' do
       expect(subject.string).to eq(" D ")
@@ -15,10 +15,9 @@ describe StairsDown do
       it 'should do nothing unless moved onto' do
         expect(subject.player_interaction).to eq(nil)
       end
-      it 'should load_level otherwise' do ### WEAK TEST
+      it 'should load_level otherwise' do 
         subject.blocks_player?
-        expect{ subject.player_interaction }
-        .to raise_error(LevelChange)
+        expect{ subject.player_interaction }.to raise_error(LevelChange)
         begin
           subject.blocks_player?
           subject.player_interaction

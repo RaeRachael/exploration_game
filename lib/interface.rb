@@ -12,7 +12,7 @@ class Interface
     level_load
   end
 
-  def blocked?(y, x, who) #called - moveable; needs - tile
+  def blocked?(y, x, who) # called - moveable; needs - tile
     case who
     when "player"
       @tile[y][x].blocks_player?
@@ -21,19 +21,19 @@ class Interface
     end
   end
 
-  def player_keys #called - tile; needs - moveable
+  def player_keys # called - tile; needs - moveable
     @player.key
   end
 
-  def get_key #called - tile; needs - moveable
+  def get_key # called - tile; needs - moveable
     @player.key += 1
   end
 
-  def use_key #called - tile; needs - moveable
+  def use_key # called - tile; needs - moveable
     @player.key -= 1
   end
 
-  def remove_key_from_level #called - tile; needs - interface
+  def remove_key_from_level # called - tile; needs - interface
     @tile[@player.y][@player.x] = Empty.new(self)
     @levels[@lvl_num][@player.y - 2][@player.x - 2] = " "
   end
@@ -43,13 +43,13 @@ class Interface
     @levels[@lvl_num][@player.y - 2][@player.x - 2] = "\\"
   end
 
-  def print_to_screen(string = "") #called - game, interface, tile; needs -
-    selection  ## [0..2*sight]grid
+  def print_to_screen(string = "") # called - game, interface, tile; needs -
+    selection
     add_moveables_to_print
     print_level(string)
   end
 
-  def same_space_as_a_monster #called - game; needs - interface, moveable
+  def same_space_as_a_monster # called - game; needs - interface, moveable
     if @monsters
       @monsters.each do |monster|
         if @player.y == monster.y && @player.x == monster.x
@@ -60,7 +60,7 @@ class Interface
     end
   end
 
-  def tile_interaction #called - game; needs - interface, moveable
+  def tile_interaction # called - game; needs - interface, moveable
     begin
       @tile[@player.y][@player.x].player_interaction
     rescue LevelChange => code
@@ -76,11 +76,11 @@ class Interface
     end
   end
 
-  def player_move #called - game; needs - interface, moveable
+  def player_move # called - game; needs - interface, moveable
     @player.move
   end
 
-  def monster_move #called - game; needs - interface, moveable
+  def monster_move # called - game; needs - interface, moveable
     if @monsters
       @monsters.each { |monster| monster.move }
     end
@@ -88,11 +88,11 @@ class Interface
 
   private
 
-  def create_player #called - game; needs - moveable
+  def create_player # called - game; needs - moveable
     @player = Player.new(3, 3, self)
   end
 
-  def set_lvl_num #called - game; holds level knowledge
+  def set_lvl_num # called - game; holds level knowledge
     @lvl_num = 0
   end
 
@@ -100,7 +100,7 @@ class Interface
     @levels = level_data_1
   end
 
-  def level_load #called - game & tile; needs - tile & interface
+  def level_load # called - game & tile; needs - tile & interface
     @tile = @levels[@lvl_num].map do |line, y|
       line.split("").map do |char, x|
         char = into_tile(char, self)
@@ -117,7 +117,7 @@ class Interface
     add_monsters_in
   end
 
-  def add_monsters_in #called - interface; needs - moveable
+  def add_monsters_in # called - interface; needs - moveable
     @monsters = []
     @levels[@lvl_num].each_with_index do |line, y|
       line.split("").each_with_index do |char, x|
@@ -129,7 +129,7 @@ class Interface
     end
   end
 
-  def monster_blocks?(y,x) #called - moveable; needs - interface
+  def monster_blocks?(y,x) # called - moveable; needs - interface
     @monsters.each do |monster|
       return true if x == monster.x && y == monster.y
     end
@@ -140,35 +140,35 @@ class Interface
     @lvl_num -= 1
   end
 
-  def lvl_up #called - tile; needs - interface
+  def lvl_up # called - tile; needs - interface
     @lvl_num += 1
   end
 
   def selection
-    @sight = 2
+    @sight = @player.sight
     @printxy = []
-    @to_printy = @tile[(@player.y - @sight)..(@player.y + @sight)]
-    @to_printy.map do |line|
+    @to_print = @tile[(@player.y - @sight)..(@player.y + @sight)]
+    @to_print.map do |line|
       @printxy << line[(@player.x - @sight)..(@player.x + @sight)].map{|a| a.string}
     end
   end
 
-  def add_moveables_to_print #called - interface; needs - moveable, interface
+  def add_moveables_to_print # called - interface; needs - moveable, interface
     @printxy[@sight][@sight] = " o "
-    if @monsters
-      @monsters.each do |monster|
-        if (monster.y - @player.y).abs <= @sight && (monster.x - @player.x).abs <= @sight
-          y = @sight + (monster.y - @player.y)
-          x = @sight + (monster.x - @player.x)
-          @printxy[y][x] = " X "
-        end
+    return unless @monsters
+    @monsters.each do |monster|
+      if (monster.y - @player.y).abs <= @sight && (monster.x - @player.x).abs <= @sight
+        y = @sight + (monster.y - @player.y)
+        x = @sight + (monster.x - @player.x)
+        @printxy[y][x] = " X "
       end
     end
   end
 
-  def print_level(string) #called - interface; needs - interface
+  def print_level(string) # called - interface; needs - interface
     @printxy.each { |slice| puts slice.join("") }
     puts string
+    puts "\n\n"
   end
 
 end

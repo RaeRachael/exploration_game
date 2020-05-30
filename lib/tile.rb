@@ -41,9 +41,8 @@ class StairsUp < Tile
   end
 
   def player_interaction
-    if @move_on
-      raise LevelChange.new('up')
-    end
+    return unless @move_on
+    raise LevelChange.new('up')
   end
 end
 
@@ -60,9 +59,8 @@ class StairsDown < Tile
   end
 
   def player_interaction
-    if @move_on
-      raise LevelChange.new('down')
-    end
+    return unless @move_on
+    raise LevelChange.new('down')
   end
 end
 

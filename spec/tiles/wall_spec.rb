@@ -1,8 +1,8 @@
 require_relative '../../lib/tile.rb'
 
 describe Wall do
-  let(:interface_double) {double(:interface)}
-  let(:subject) {Wall.new(interface_double)}
+  let(:interface_double) { double(:interface) }
+  let(:subject) { Wall.new(interface_double) }
   describe '#string' do
     it 'should have "///" representation' do
       expect(subject.string).to eq("///")
@@ -14,7 +14,7 @@ describe Wall do
       expect(subject.blocks_player?).to eq(true)
     end
   end
-  describe '#blocks_monster'do
+  describe '#blocks_monster' do
     it 'should block monster' do
       expect(subject.blocks_monster?).to eq(true)
     end

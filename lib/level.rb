@@ -9,24 +9,15 @@ end
 
 def into_tile(str, interface)
   case str
-  when "-"
-    return Wall.new(interface)
-  when "S"
-    return StairsUp.new(interface)
-  when "D"
-    return StairsDown.new(interface)
-  when "t"
-    return Treasure.new(interface)
-  when "k"
-    return Key.new(interface)
-  when "|"
-    return Door.new(interface)
-  when " "
-    return Empty.new(interface)
-  when "\\"
-    return DoorUnLocked.new(interface)
-  else
-    return Empty.new(interface)
+  when "-" then Wall.new(interface)
+  when "S" then StairsUp.new(interface)
+  when "D" then StairsDown.new(interface)
+  when "t" then Treasure.new(interface)
+  when "k" then Key.new(interface)
+  when "|" then Door.new(interface)
+  when " " then Empty.new(interface)
+  when "\\" then DoorUnLocked.new(interface)
+  else Empty.new(interface)
   end
 end
 
