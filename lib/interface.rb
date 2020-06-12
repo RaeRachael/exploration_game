@@ -37,7 +37,7 @@ class Interface
     @levels[@lvl_num][@player.y - 2][@player.x - 2] = " "
   end
 
-  def turn_into_UnLocked #called - tile; needs - interface
+  def turn_into_UnLocked # called - tile; needs - interface
     @tile[@player.y][@player.x] = DoorUnLocked.new(self)
     @levels[@lvl_num][@player.y - 2][@player.x - 2] = "\\"
   end

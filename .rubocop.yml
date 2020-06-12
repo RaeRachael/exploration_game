@@ -61,7 +61,7 @@ Style/Not:
 Style/NumericLiterals:
   Enabled: true
 Style/NumericPredicate:
-  Enabled: true
+  Enabled: false
 Style/OneLineConditional:
   Enabled: true
 Style/RedundantParentheses:
