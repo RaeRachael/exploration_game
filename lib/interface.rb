@@ -105,6 +105,11 @@ class Interface
         into_tile(char, self)
       end
     end
+    create_empty_buffer
+    add_monsters_in
+  end
+
+  def create_empty_buffer
     2.times { @tile.unshift([Empty.new(self)] * @tile[0].length) }
     2.times { @tile.push([Empty.new(self)] * @tile[0].length) }
     @tile.map do |line|
@@ -113,7 +118,6 @@ class Interface
         line.push(Empty.new(self))
       end
     end
-    add_monsters_in
   end
 
   def add_monsters_in # called - interface; needs - moveable
@@ -146,15 +150,14 @@ class Interface
   def selection
     @sight = @player.sight
     @printxy = []
-    @to_print = @tile[(@player.y - @sight)..(@player.y + @sight)]
-    @to_print.map do |line|
+    @print_y = @tile[(@player.y - @sight)..(@player.y + @sight)]
+    @print_y.each do |line|
       @printxy << line[(@player.x - @sight)..(@player.x + @sight)].map{ |a| a.string }
     end
   end
 
   def add_moveables_to_print # called - interface; needs - moveable, interface
     @printxy[@sight][@sight] = " o "
-    return unless @monsters
     @monsters.each do |monster|
       if (monster.y - @player.y).abs <= @sight && (monster.x - @player.x).abs <= @sight
         y = @sight + (monster.y - @player.y)
