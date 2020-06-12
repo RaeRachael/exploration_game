@@ -24,7 +24,7 @@ class Interface
     @player.key
   end
 
-  def get_key # called - tile; needs - moveable
+  def collect_key # called - tile; needs - moveable
     @player.key += 1
   end
 

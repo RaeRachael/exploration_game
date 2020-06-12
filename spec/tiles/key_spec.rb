@@ -9,13 +9,13 @@ describe Key do
     end
   end
 
-  before do 
-    allow(interface_double).to receive(:get_key) {}
+  before do
+    allow(interface_double).to receive(:collect_key) {}
     allow(interface_double).to receive(:remove_key_from_level) { true }
   end
 
   describe '#player_interaction' do
-    it 'should call #get_key and #remove_key_from_level' do # a good test?
+    it 'should call #collect_key and #remove_key_from_level' do # a good test?
       expect(subject.player_interaction).to eq(true)
     end
   end
