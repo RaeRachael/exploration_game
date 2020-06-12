@@ -49,12 +49,10 @@ class Interface
   end
 
   def same_space_as_a_monster # called - game; needs - interface, moveable
-    if @monsters
-      @monsters.each do |monster|
-        if @player.y == monster.y && @player.x == monster.x
-          print_to_screen("you are dead")
-          exit(1)
-        end
+    @monsters&.each do |monster|
+      if @player.y == monster.y && @player.x == monster.x
+        print_to_screen("you are dead")
+        exit(1)
       end
     end
   end
@@ -80,9 +78,7 @@ class Interface
   end
 
   def monster_move # called - game; needs - interface, moveable
-    if @monsters
-      @monsters.each { |monster| monster.move }
-    end
+    @monsters&.each { |monster| monster.move }
   end
 
   private
@@ -110,8 +106,18 @@ class Interface
   end
 
   def create_empty_buffer
-    2.times { @tile.unshift([Empty.new(self)] * @tile[0].length) }
-    2.times { @tile.push([Empty.new(self)] * @tile[0].length) }
+    empty_buffer_top_bottom
+    empty_buffer_left_right
+  end
+
+  def empty_buffer_top_bottom
+    2.times do
+      @tile.unshift([Empty.new(self)] * @tile[0].length)
+      @tile.push([Empty.new(self)] * @tile[0].length)
+    end
+  end
+
+  def empty_buffer_left_right
     @tile.map do |line|
       2.times do
         line.unshift(Empty.new(self))
