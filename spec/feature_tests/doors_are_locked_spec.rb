@@ -12,7 +12,7 @@ describe 'doors are locked' do
       game.setup
       begin
         game.main_loop
-      rescue SystemExit=>exit_code
+      rescue SystemExit => exit_code
         expect(exit_code.status).to eq(1)
       end
       $stdin = STDIN

@@ -1,7 +1,6 @@
-
 class LevelChange < StandardError
   attr_reader :thing
-  def initialize(msg="My default message")
+  def initialize(msg)
     @thing = thing
     super(msg)
   end

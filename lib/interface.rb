@@ -1,4 +1,3 @@
-
 require_relative 'moveable'
 require_relative 'level'
 require_relative 'tile'
@@ -101,9 +100,9 @@ class Interface
   end
 
   def level_load # called - game & tile; needs - tile & interface
-    @tile = @levels[@lvl_num].map do |line, y|
-      line.split("").map do |char, x|
-        char = into_tile(char, self)
+    @tile = @levels[@lvl_num].map do |line|
+      line.split("").map do |char|
+        into_tile(char, self)
       end
     end
     2.times { @tile.unshift([Empty.new(self)] * @tile[0].length) }
@@ -122,21 +121,21 @@ class Interface
     @levels[@lvl_num].each_with_index do |line, y|
       line.split("").each_with_index do |char, x|
         if char == "X"
-          basic = Monster.new(x+2, y+2, self)
+          basic = Monster.new(x + 2, y + 2, self)
           @monsters << basic
         end
       end
     end
   end
 
-  def monster_blocks?(y,x) # called - moveable; needs - interface
+  def monster_blocks?(y, x) # called - moveable; needs - interface
     @monsters.each do |monster|
       return true if x == monster.x && y == monster.y
     end
     return false
   end
 
-  def lvl_down #called - tile; needs - interface
+  def lvl_down # called - tile; needs - interface
     @lvl_num -= 1
   end
 
@@ -149,7 +148,7 @@ class Interface
     @printxy = []
     @to_print = @tile[(@player.y - @sight)..(@player.y + @sight)]
     @to_print.map do |line|
-      @printxy << line[(@player.x - @sight)..(@player.x + @sight)].map{|a| a.string}
+      @printxy << line[(@player.x - @sight)..(@player.x + @sight)].map{ |a| a.string }
     end
   end
 

@@ -41,10 +41,10 @@ describe Player do
       it "returns the /[wasdp]/ charactors entered in order,
       and moves in the player in the correct way" do
         $stdin = input2
-        expect{ player.move }.to change{ player.y }.by(1)  # s
+        expect{ player.move }.to change{ player.y }.by(1) # s
         expect{ player.move }.to change{ player.x }.by(-1) # a
         expect{ player.move }.to change{ player.y }.by(-1) # w
-        expect{ player.move }.to change{ player.x }.by(1)  # d
+        expect{ player.move }.to change{ player.x }.by(1) # d
         expect(player.user_move).to eq("p") # pause menu not yet created
         $stdin = STDIN
       end
@@ -59,10 +59,10 @@ describe Player do
       it "returns the /[wasdp]/ charactors entered in order,
       and moves in the player in the correct way" do
         $stdin = input2
-        expect{ player.move }.to change{ player.y }.by(0)  # s
+        expect{ player.move }.to change{ player.y }.by(0) # s
         expect{ player.move }.to change{ player.x }.by(0) # a
         expect{ player.move }.to change{ player.y }.by(0) # w
-        expect{ player.move }.to change{ player.x }.by(0)  # d
+        expect{ player.move }.to change{ player.x }.by(0) # d
         expect(player.user_move).to eq("p") # pause menu not yet created
         $stdin = STDIN
       end
