@@ -24,10 +24,24 @@ irb -r ./lib/game.rb
 
 ### Example Screenshot of the Game
 
-![alt text](https://github.com/RaeRachael/exploration_game/blob/master/sample_screenshot.png)
-! this needs to be updated !
+![alt text](https://github.com/RaeRachael/exploration_game/blob/master/expample_screenshot_14_06.png)
 
 ## Comments About the Code Plan, Struggles and Aims
+
+### Sunday 14th June
+
+#### Coding Aims Completed
+* fixed personal rubocop
+* Impoved code base via rubocop suggestions
+
+#### Why Change Rubocop
+So I felt that the 300+ offences that the default rubocop from makers were not all justified, and didn't fit my view of what bad ruby code looked like. In addition I didn't what the default spec_helper file to be included in the rubocop checks.
+The particular rubocop checks that i didn't like can be seen in the .rubocop.yml file (I guess the most noticable is allowing `"strings without special characters, to use ""`). The issuse I was having in setting up my personalised rubocop was that I had named the file 'rubocop.yml' instead of '.rubocop.yml', taking extra care in file names is something that I am to focus on a little bit more in the future.
+
+Additional benifits to having a personalised rubocop means that suggestions like using safe navigation (`&.`) can now be seen and utilised in the code, making it more readable and neater for other people to read. There are still a few offences, mostly due to a few methods being too long and complex, some of which may not be easy to fix (and fix might lead to messier code) but now I will aim to look at this methods and see if they can be simplified, if not at least now I know how to exclude them from rubocop checks.
+
+#### Future Aims
+As I have been learning javascript recently, there is now the possiblity to rewrite this game in javascript to make in avaliable on the web instead of being stuck in the terminal. This means that new development here will likely be paused until a javascript version is at the same or similar point. Then new features could be added to both versions at the same time, helping to develop insights into the differences and similarities of these languages and improve my understanding in both.
 
 ### Staurday 30th May
 
