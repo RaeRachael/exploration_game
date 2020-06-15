@@ -114,7 +114,7 @@ class Door < Tile
   end
 
   def player_interaction
-    @interface.turn_into_UnLocked
+    @interface.turn_into_un_locked
   end
 end
 

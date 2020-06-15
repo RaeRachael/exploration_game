@@ -37,7 +37,7 @@ class Interface
     @levels[@lvl_num][@player.y - 2][@player.x - 2] = " "
   end
 
-  def turn_into_UnLocked # called - tile; needs - interface
+  def turn_into_un_locked # called - tile; needs - interface
     @tile[@player.y][@player.x] = DoorUnLocked.new(self)
     @levels[@lvl_num][@player.y - 2][@player.x - 2] = "\\"
   end
@@ -61,15 +61,7 @@ class Interface
     begin
       @tile[@player.y][@player.x].player_interaction
     rescue LevelChange => code
-      if code.message == 'down'
-        lvl_down
-        print_to_screen("found stairs leading down")
-      elsif code.message == 'up'
-        lvl_up
-        print_to_screen("found stairs leading up")
-      end
-      sleep(1)
-      level_load
+      level_change(code.message)
     end
   end
 
@@ -103,6 +95,18 @@ class Interface
     end
     create_empty_buffer
     add_monsters_in
+  end
+
+  def level_change(code)
+    if code == 'down'
+      lvl_down
+      print_to_screen("found stairs leading down")
+    elsif code == 'up'
+      lvl_up
+      print_to_screen("found stairs leading up")
+    end
+    sleep(1)
+    level_load
   end
 
   def create_empty_buffer

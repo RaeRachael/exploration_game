@@ -16,7 +16,7 @@ describe Door do
   end
 
   context 'player has no keys' do
-    before do 
+    before do
       allow(interface_double).to receive(:player_keys) { 0 }
     end
 
@@ -42,7 +42,7 @@ describe Door do
 
   describe '#player_interaction' do
     it 'should turn into an unlocked door' do
-      allow(interface_double).to receive(:turn_into_UnLocked) { true }
+      allow(interface_double).to receive(:turn_into_un_locked) { true }
       expect(subject.player_interaction).to eq(true)
     end
   end
