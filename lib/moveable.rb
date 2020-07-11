@@ -43,7 +43,7 @@ class Player < Moveable
       $stdin.getch
     end
     return chr if chr.match(/[wasdp]/)
-  rescue Timeout::Error
+    rescue Timeout::Error
   end
 
   def move
