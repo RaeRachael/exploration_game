@@ -20,6 +20,13 @@ describe Monster do
 
   end
 
+  describe "moves should be random" do
+    it "uses the #sample function" do
+      allow_any_instance_of(Array).to receive(:sample).and_return("a")
+      expect(monster.possible_moves).to include("a")
+    end
+  end
+
   describe "#move" do
     context "move not blocked" do
       before do
