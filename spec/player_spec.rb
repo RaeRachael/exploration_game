@@ -63,7 +63,7 @@ describe Player do
         expect{ player.move }.to change{ player.x }.by(0) # a
         expect{ player.move }.to change{ player.y }.by(0) # w
         expect{ player.move }.to change{ player.x }.by(0) # d
-        expect{ player.move }.to raise_error( SystemExit ) # pause menu not yet created
+        expect{ player.move }.to raise_error(SystemExit) # pause menu not yet created
         $stdin = STDIN
       end
     end
