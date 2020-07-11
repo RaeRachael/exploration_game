@@ -1,3 +1,4 @@
+
 # Making a Game, Project in Progress
 
 ### How the Game Works
@@ -27,6 +28,12 @@ irb -r ./lib/game.rb
 ![alt text](https://github.com/RaeRachael/exploration_game/blob/master/expample_screenshot_14_06.png)
 
 ## Comments About the Code Plan, Struggles and Aims
+
+### Saturday 11th July
+
+#### Coding Aims Completed
+* Added SimpleCov to check test coverage
+* Added tests to get coverage to 100%
 
 ### Sunday 14th June
 
