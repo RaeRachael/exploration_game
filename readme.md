@@ -27,6 +27,11 @@ irb -r ./lib/game.rb
 
 ![alt text](https://github.com/RaeRachael/exploration_game/blob/master/expample_screenshot_14_06.png)
 
+## Link to JavaScript Version
+This version is being actively worked on, once the features are at a similiar point as the ruby version I will look to add to both at the same time.
+[JavaScript Web version](https://github.com/RaeRachael/JS_exploration_game)
+
+
 ## Comments About the Code Plan, Struggles and Aims
 
 ### Saturday 11th July
